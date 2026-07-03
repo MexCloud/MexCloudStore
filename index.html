@@ -13,55 +13,60 @@ background:#0b0f1a;
 color:white;
 }
 
-/* HEADER */
 header{
 background:linear-gradient(90deg,#a855f7,#06b6d4);
 padding:20px;
 text-align:center;
 font-size:26px;
 font-weight:bold;
-letter-spacing:1px;
 }
 
-/* CATEGORY BOX */
-.category{
+.product{
 background:#111827;
-margin:12px;
-padding:15px;
-border-radius:12px;
-cursor:pointer;
-font-weight:bold;
-border:1px solid #2d2d3a;
-}
-
-.category:hover{
-background:#1f2937;
-}
-
-/* SUB MENU */
-.sub{
-display:none;
-margin-left:15px;
-}
-
-/* PRODUCT CARD */
-.item{
-background:#1f2937;
 margin:10px;
 padding:12px;
 border-radius:12px;
 }
 
-/* BUTTON */
-.btn{
-display:inline-block;
-margin-top:8px;
+button{
 padding:8px 12px;
+border:none;
+border-radius:8px;
 background:#06b6d4;
 color:black;
-border-radius:8px;
-text-decoration:none;
 font-weight:bold;
+cursor:pointer;
+margin-top:5px;
+}
+
+.cart{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#1f2937;
+padding:15px;
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+}
+
+.cart h3{
+margin:0 0 10px 0;
+}
+
+#items{
+font-size:14px;
+margin-bottom:10px;
+}
+
+.checkout{
+background:#22c55e;
+width:100%;
+}
+
+.disabled{
+background:gray !important;
+cursor:not-allowed;
 }
 </style>
 </head>
@@ -70,69 +75,100 @@ font-weight:bold;
 
 <header>💎 MexCloud Store</header>
 
-<!-- HP -->
-<div class="category" onclick="toggle('hp')">📱 Handphone</div>
-<div id="hp" class="sub">
-  <div class="item">Samsung S25 Ultra - $950<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
-
-  <div class="item">iPhone 15 Pro - $899<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+<!-- PRODUK -->
+<div class="product">
+<h3>OXVA Xlim Pro</h3>
+<p>$35</p>
+<button onclick="add('OXVA Xlim Pro',35)">Add to Cart</button>
 </div>
 
-<!-- VAPE -->
-<div class="category" onclick="toggle('vape')">💨 Vape / Pod</div>
-<div id="vape" class="sub">
-
-  <div class="category" onclick="toggle('device')">Device</div>
-  <div id="device" class="sub">
-    <div class="item">OXVA Xlim Pro - $35<br>
-    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
-  </div>
-
-  <div class="category" onclick="toggle('cart')">Cartridge</div>
-  <div id="cart" class="sub">
-    <div class="item">OXVA Cartridge - $5<br>
-    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
-  </div>
-
-  <div class="category" onclick="toggle('liq')">Liquid</div>
-  <div id="liq" class="sub">
-    <div class="item">Salt Nic Premium - $7<br>
-    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
-  </div>
-
+<div class="product">
+<h3>iPhone 15 Pro</h3>
+<p>$900</p>
+<button onclick="add('iPhone 15 Pro',900)">Add to Cart</button>
 </div>
 
-<!-- ROKOK -->
-<div class="category" onclick="toggle('rokok')">🚬 Rokok Indonesia</div>
-<div id="rokok" class="sub">
-  <div class="item">Gudang Garam - $18<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
-
-  <div class="item">Sampoerna - $20<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+<div class="product">
+<h3>Gudang Garam</h3>
+<p>$18</p>
+<button onclick="add('Gudang Garam',18)">Add to Cart</button>
 </div>
 
-<!-- OBAT -->
-<div class="category" onclick="toggle('obat')">💊 Obat Indonesia</div>
-<div id="obat" class="sub">
-  <div class="item">Paracetamol - $3<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+<div class="product">
+<h3>Paracetamol</h3>
+<p>$3</p>
+<button onclick="add('Paracetamol',3)">Add to Cart</button>
+</div>
 
-  <div class="item">Bodrex - $2<br>
-  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+<!-- CART -->
+<div class="cart">
+<h3>🛒 Keranjang</h3>
+<div id="items">Kosong</div>
+<div>Total: $<span id="total">0</span></div>
+
+<button id="checkoutBtn" class="checkout disabled" onclick="checkout()" disabled>
+Checkout Telegram
+</button>
 </div>
 
 <script>
-function toggle(id){
-  var el = document.getElementById(id);
-  if(el.style.display === "block"){
-    el.style.display = "none";
-  }else{
-    el.style.display = "block";
-  }
+
+let cart = [];
+
+function add(name,price){
+cart.push({name,price});
+render();
 }
+
+function render(){
+
+let items = document.getElementById("items");
+let total = 0;
+
+if(cart.length===0){
+items.innerHTML="Kosong";
+}
+
+else{
+items.innerHTML = cart.map((c,i)=>{
+total += c.price;
+return `• ${c.name} - $${c.price}`;
+}).join("<br>");
+}
+
+document.getElementById("total").innerText = total;
+
+// MIN ORDER
+let btn = document.getElementById("checkoutBtn");
+
+if(total >= 10){
+btn.disabled = false;
+btn.classList.remove("disabled");
+}else{
+btn.disabled = true;
+btn.classList.add("disabled");
+}
+
+}
+
+function checkout(){
+
+let total = cart.reduce((a,b)=>a+b.price,0);
+
+let msg = "🛒 MexCloud Order:%0A";
+
+cart.forEach(c=>{
+msg += `- ${c.name} ($${c.price})%0A`;
+});
+
+msg += `%0A💰 Total: $${total}`;
+
+let url = "https://t.me/MexCloudStore?text=" + msg;
+
+window.open(url,"_blank");
+
+}
+
 </script>
 
 </body>
