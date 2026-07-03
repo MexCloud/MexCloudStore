@@ -1,10 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MexCloud Store</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b0f1a;
+color:white;
+}
+
+/* HEADER */
+header{
+background:linear-gradient(90deg,#a855f7,#06b6d4);
+padding:20px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+/* CATEGORY BOX */
+.category{
+background:#111827;
+margin:12px;
+padding:15px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+border:1px solid #2d2d3a;
+}
+
+.category:hover{
+background:#1f2937;
+}
+
+/* SUB MENU */
+.sub{
+display:none;
+margin-left:15px;
+}
+
+/* PRODUCT CARD */
+.item{
+background:#1f2937;
+margin:10px;
+padding:12px;
+border-radius:12px;
+}
+
+/* BUTTON */
+.btn{
+display:inline-block;
+margin-top:8px;
+padding:8px 12px;
+background:#06b6d4;
+color:black;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+}
+</style>
 </head>
+
 <body>
-<h1>MexCloud Store</h1>
-<p>Website sudah jalan</p>
+
+<header>💎 MexCloud Store</header>
+
+<!-- HP -->
+<div class="category" onclick="toggle('hp')">📱 Handphone</div>
+<div id="hp" class="sub">
+  <div class="item">Samsung S25 Ultra - $950<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+
+  <div class="item">iPhone 15 Pro - $899<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+</div>
+
+<!-- VAPE -->
+<div class="category" onclick="toggle('vape')">💨 Vape / Pod</div>
+<div id="vape" class="sub">
+
+  <div class="category" onclick="toggle('device')">Device</div>
+  <div id="device" class="sub">
+    <div class="item">OXVA Xlim Pro - $35<br>
+    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+  </div>
+
+  <div class="category" onclick="toggle('cart')">Cartridge</div>
+  <div id="cart" class="sub">
+    <div class="item">OXVA Cartridge - $5<br>
+    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+  </div>
+
+  <div class="category" onclick="toggle('liq')">Liquid</div>
+  <div id="liq" class="sub">
+    <div class="item">Salt Nic Premium - $7<br>
+    <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+  </div>
+
+</div>
+
+<!-- ROKOK -->
+<div class="category" onclick="toggle('rokok')">🚬 Rokok Indonesia</div>
+<div id="rokok" class="sub">
+  <div class="item">Gudang Garam - $18<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+
+  <div class="item">Sampoerna - $20<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+</div>
+
+<!-- OBAT -->
+<div class="category" onclick="toggle('obat')">💊 Obat Indonesia</div>
+<div id="obat" class="sub">
+  <div class="item">Paracetamol - $3<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+
+  <div class="item">Bodrex - $2<br>
+  <a class="btn" href="https://t.me/MexCloudStore">Order Telegram</a></div>
+</div>
+
+<script>
+function toggle(id){
+  var el = document.getElementById(id);
+  if(el.style.display === "block"){
+    el.style.display = "none";
+  }else{
+    el.style.display = "block";
+  }
+}
+</script>
+
 </body>
 </html>
