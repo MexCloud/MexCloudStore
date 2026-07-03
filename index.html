@@ -15,10 +15,31 @@ color:white;
 
 header{
 background:linear-gradient(90deg,#a855f7,#06b6d4);
-padding:20px;
+padding:18px;
 text-align:center;
 font-size:26px;
 font-weight:bold;
+}
+
+/* SEARCH */
+.search{
+padding:10px;
+text-align:center;
+}
+
+.search input{
+width:90%;
+padding:10px;
+border-radius:10px;
+border:none;
+outline:none;
+}
+
+/* PRODUCT */
+.products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
 }
 
 .product{
@@ -26,47 +47,50 @@ background:#111827;
 margin:10px;
 padding:12px;
 border-radius:12px;
+width:160px;
+text-align:center;
+}
+
+.product img{
+width:100%;
+border-radius:10px;
 }
 
 button{
-padding:8px 12px;
+margin-top:8px;
+padding:7px 10px;
+background:#06b6d4;
 border:none;
 border-radius:8px;
-background:#06b6d4;
-color:black;
 font-weight:bold;
 cursor:pointer;
-margin-top:5px;
 }
 
+/* CART */
 .cart{
 position:fixed;
 bottom:0;
 left:0;
 right:0;
 background:#1f2937;
-padding:15px;
+padding:12px;
 border-top-left-radius:15px;
 border-top-right-radius:15px;
-}
-
-.cart h3{
-margin:0 0 10px 0;
-}
-
-#items{
-font-size:14px;
-margin-bottom:10px;
-}
-
-.checkout{
-background:#22c55e;
-width:100%;
 }
 
 .disabled{
 background:gray !important;
 cursor:not-allowed;
+}
+
+.checkout{
+width:100%;
+background:#22c55e;
+color:black;
+padding:10px;
+border:none;
+border-radius:10px;
+font-weight:bold;
 }
 </style>
 </head>
@@ -75,38 +99,60 @@ cursor:not-allowed;
 
 <header>💎 MexCloud Store</header>
 
-<!-- PRODUK -->
-<div class="product">
-<h3>OXVA Xlim Pro</h3>
-<p>$35</p>
-<button onclick="add('OXVA Xlim Pro',35)">Add to Cart</button>
+<!-- SEARCH -->
+<div class="search">
+<input type="text" placeholder="Cari produk..." onkeyup="search(this.value)">
 </div>
 
-<div class="product">
-<h3>iPhone 15 Pro</h3>
+<!-- PRODUCTS -->
+<div class="products" id="productList">
+
+<!-- HP -->
+<div class="product" data-name="iphone 15 pro">
+<img src="https://via.placeholder.com/150">
+<h4>iPhone 15 Pro</h4>
 <p>$900</p>
-<button onclick="add('iPhone 15 Pro',900)">Add to Cart</button>
+<button onclick="add('iPhone 15 Pro',900)">Add</button>
 </div>
 
-<div class="product">
-<h3>Gudang Garam</h3>
+<div class="product" data-name="samsung s25 ultra">
+<img src="https://via.placeholder.com/150">
+<h4>Samsung S25 Ultra</h4>
+<p>$950</p>
+<button onclick="add('Samsung S25 Ultra',950)">Add</button>
+</div>
+
+<!-- VAPE -->
+<div class="product" data-name="oxva xlim pro">
+<img src="https://via.placeholder.com/150">
+<h4>OXVA Xlim Pro</h4>
+<p>$35</p>
+<button onclick="add('OXVA Xlim Pro',35)">Add</button>
+</div>
+
+<!-- ROKOK -->
+<div class="product" data-name="gudang garam">
+<img src="https://via.placeholder.com/150">
+<h4>Gudang Garam</h4>
 <p>$18</p>
-<button onclick="add('Gudang Garam',18)">Add to Cart</button>
+<button onclick="add('Gudang Garam',18)">Add</button>
 </div>
 
-<div class="product">
-<h3>Paracetamol</h3>
+<!-- OBAT -->
+<div class="product" data-name="paracetamol">
+<img src="https://via.placeholder.com/150">
+<h4>Paracetamol</h4>
 <p>$3</p>
-<button onclick="add('Paracetamol',3)">Add to Cart</button>
+<button onclick="add('Paracetamol',3)">Add</button>
+</div>
+
 </div>
 
 <!-- CART -->
 <div class="cart">
-<h3>🛒 Keranjang</h3>
-<div id="items">Kosong</div>
+<div id="cartItems">Keranjang kosong</div>
 <div>Total: $<span id="total">0</span></div>
-
-<button id="checkoutBtn" class="checkout disabled" onclick="checkout()" disabled>
+<button id="checkoutBtn" class="checkout disabled" disabled onclick="checkout()">
 Checkout Telegram
 </button>
 </div>
@@ -115,24 +161,23 @@ Checkout Telegram
 
 let cart = [];
 
+// ADD TO CART
 function add(name,price){
 cart.push({name,price});
 render();
 }
 
+// RENDER CART
 function render(){
-
-let items = document.getElementById("items");
+let items = document.getElementById("cartItems");
 let total = 0;
 
 if(cart.length===0){
-items.innerHTML="Kosong";
-}
-
-else{
-items.innerHTML = cart.map((c,i)=>{
+items.innerHTML="Keranjang kosong";
+}else{
+items.innerHTML = cart.map(c=>{
 total += c.price;
-return `• ${c.name} - $${c.price}`;
+return "• "+c.name+" - $"+c.price;
 }).join("<br>");
 }
 
@@ -148,9 +193,24 @@ btn.classList.remove("disabled");
 btn.disabled = true;
 btn.classList.add("disabled");
 }
-
 }
 
+// SEARCH
+function search(val){
+val = val.toLowerCase();
+let products = document.querySelectorAll(".product");
+
+products.forEach(p=>{
+let name = p.getAttribute("data-name");
+if(name.includes(val)){
+p.style.display="block";
+}else{
+p.style.display="none";
+}
+});
+}
+
+// CHECKOUT TELEGRAM
 function checkout(){
 
 let total = cart.reduce((a,b)=>a+b.price,0);
@@ -158,15 +218,14 @@ let total = cart.reduce((a,b)=>a+b.price,0);
 let msg = "🛒 MexCloud Order:%0A";
 
 cart.forEach(c=>{
-msg += `- ${c.name} ($${c.price})%0A`;
+msg += "- "+c.name+" ($"+c.price+")%0A";
 });
 
-msg += `%0A💰 Total: $${total}`;
+msg += "%0A💰 Total: $"+total;
 
-let url = "https://t.me/MexCloudStore?text=" + msg;
+let url = "https://t.me/MexCloudStore?text="+msg;
 
 window.open(url,"_blank");
-
 }
 
 </script>
