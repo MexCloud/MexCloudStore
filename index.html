@@ -27,22 +27,78 @@ button{background:#8b5cf6;color:#fff;border:none;border-radius:8px;padding:8px 1
 </style>
 </head>
 <body>
-<header>🐉 MexCloud Store</header>
-<div id="cartBtn">🛒 <span class="badge" id="count">0</span></div>
-<div class="dragon">🐉</div><div class="fire" id="fire">🔥</div>
-<div class="banner">Selamat Datang di MexCloud</div>
 
-<div class="category" onclick="tg('hp')">📱 Handphone</div>
-<div id="hp" class="sub">
-<div class="product"><span>iPhone 15 Pro - $900</span><button onclick="add('iPhone 15 Pro',900)">Tambah</button></div>
-<div class="product"><span>S25 Ultra - $950</span><button onclick="add('S25 Ultra',950)">Tambah</button></div>
+<header class="header">
+
+    <div class="logo-title">
+        <h2>🐉 MexCloud Store</h2>
+    </div>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Cari produk..."
+            onkeyup="searchProduct()">
+    </div>
+
+    <div id="cartBtn" class="cart-btn">
+        🛒
+        <span class="badge" id="count">0</span>
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="cloud-bg"></div>
+
+    <img
+        src="logo.png"
+        class="dragon-logo"
+        alt="MexCloud Logo">
+
+    <h1>MexCloud Store</h1>
+
+    <p>
+        Premium Digital Marketplace
+    </p>
+
+</section>
+
+
+<main class="container">
+
+    <!-- Produk nanti di sini -->
+
+</main>
+
+
+<div id="toast">
+    Produk berhasil ditambahkan.
 </div>
 
-<div class="category" onclick="tg('pod')">💨 Pod</div>
-<div id="pod" class="sub">
-<div class="product"><span>OXVA Xlim Pro - $35</span><button onclick="add('OXVA Xlim Pro',35)">Tambah</button></div>
-<div class="product"><span>Freebase - $7</span><button onclick="add('Freebase',7)">Tambah</button></div>
+
+<div id="cart">
+
+    <h2>🛒 Keranjang</h2>
+
+    <div id="items"></div>
+
+    <h3>
+        Total :
+        $
+        <span id="total">0</span>
+    </h3>
+
+    <button class="checkout" onclick="checkout()">
+        Checkout Telegram
+    </button>
+
 </div>
+
+</body>
 
 <div id="toast">Produk berhasil ditambahkan.</div>
 
