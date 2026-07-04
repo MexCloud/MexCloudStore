@@ -2,268 +2,65 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MexCloud Store</title>
-
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#0b0f1a;
-color:white;
-}
-
-/* HEADER */
-header{
-background:linear-gradient(90deg,#a855f7,#06b6d4);
-padding:18px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
-}
-
-/* CART ICON (SHOPEE STYLE) */
-.cart-icon{
-position:fixed;
-top:15px;
-right:15px;
-background:#22c55e;
-color:black;
-padding:10px 12px;
-border-radius:50px;
-font-weight:bold;
-cursor:pointer;
-z-index:999;
-}
-
-/* CATEGORY */
-.category{
-background:#111827;
-margin:10px;
-padding:15px;
-border-radius:12px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.sub{
-display:none;
-margin-left:15px;
-}
-
-.sub-category{
-background:#1f2937;
-margin:8px;
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-}
-
-/* PRODUCT */
-.products{
-display:none;
-margin-left:20px;
-}
-
-.product{
-background:#1f2937;
-margin:8px;
-padding:10px;
-border-radius:10px;
-}
-
-/* BUTTON */
-button{
-margin-top:5px;
-padding:6px 10px;
-background:#06b6d4;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* CART PANEL */
-.cart-panel{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#111827;
-padding:12px;
-border-top-left-radius:15px;
-border-top-right-radius:15px;
-display:none;
-z-index:999;
-}
-
-.checkout{
-width:100%;
-background:#22c55e;
-color:black;
-padding:10px;
-border:none;
-border-radius:10px;
-font-weight:bold;
-}
-
-.disabled{
-background:gray !important;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#222}
+header{position:sticky;top:0;background:linear-gradient(90deg,#b266ff,#d8b4fe);padding:16px;text-align:center;color:#fff;font-size:28px;font-weight:bold;box-shadow:0 2px 10px #0002}
+#cartBtn{position:fixed;top:15px;right:15px;background:#fff;border-radius:25px;padding:10px 14px;cursor:pointer;box-shadow:0 2px 10px #0003}
+.badge{background:red;color:#fff;border-radius:20px;padding:2px 7px;font-size:12px}
+.banner{margin:20px;background:#b266ff;color:#fff;padding:40px;border-radius:16px;text-align:center;font-size:28px}
+.category{margin:15px;padding:15px;background:#f5f5f5;border-radius:10px;cursor:pointer;font-weight:bold}
+.sub{display:none;padding:10px}
+.product{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px;margin:10px 0;border-radius:10px;box-shadow:0 2px 8px #0002;transition:.25s}
+.product:hover{transform:scale(1.03)}
+button{background:#8b5cf6;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer}
+#toast{position:fixed;right:20px;top:80px;background:#22c55e;color:#fff;padding:12px;border-radius:10px;display:none}
+#cart{position:fixed;right:-380px;top:0;width:360px;height:100%;background:#fff;box-shadow:-2px 0 12px #0003;transition:.3s;padding:15px;overflow:auto}
+#cart.open{right:0}
+.item{display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding:8px 0}
+.remove{background:#ef4444}
+.checkout{width:100%;margin-top:10px}
+.dragon{position:fixed;left:15px;bottom:15px;font-size:70px;opacity:.1;animation:f 6s infinite}
+.fire{position:fixed;left:85px;bottom:75px;font-size:35px;opacity:0}
+@keyframes f{50%{transform:translateY(-15px)}}
 </style>
 </head>
-
 <body>
+<header>🐉 MexCloud Store</header>
+<div id="cartBtn">🛒 <span class="badge" id="count">0</span></div>
+<div class="dragon">🐉</div><div class="fire" id="fire">🔥</div>
+<div class="banner">Selamat Datang di MexCloud</div>
 
-<header>
-    <span>MexCloud</span>
-</header>
-
-<!-- CART ICON -->
-<div class="cart-icon" onclick="toggleCart()">
-🛒 <span id="cartCount">0</span>
-</div>
-
-<!-- HANDPHONE -->
-<div class="category" onclick="toggle('hp')">📱 Handphone</div>
+<div class="category" onclick="tg('hp')">📱 Handphone</div>
 <div id="hp" class="sub">
-
-<div class="sub-category" onclick="toggle('samsung')">Samsung</div>
-<div id="samsung" class="products">
-  <div class="product">S25 Ultra - $950 <button onclick="add('S25 Ultra',950)">Add</button></div>
+<div class="product"><span>iPhone 15 Pro - $900</span><button onclick="add('iPhone 15 Pro',900)">Tambah</button></div>
+<div class="product"><span>S25 Ultra - $950</span><button onclick="add('S25 Ultra',950)">Tambah</button></div>
 </div>
 
-<div class="sub-category" onclick="toggle('iphone')">iPhone</div>
-<div id="iphone" class="products">
-  <div class="product">iPhone 15 Pro - $900 <button onclick="add('iPhone 15 Pro',900)">Add</button></div>
-</div>
-
-</div>
-
-<!-- POD -->
-<div class="category" onclick="toggle('pod')">💨 Pod</div>
+<div class="category" onclick="tg('pod')">💨 Pod</div>
 <div id="pod" class="sub">
-
-<div class="sub-category" onclick="toggle('device')">Device</div>
-<div id="device" class="products">
-  <div class="product">OXVA Xlim Pro - $35 <button onclick="add('OXVA Xlim Pro',35)">Add</button></div>
+<div class="product"><span>OXVA Xlim Pro - $35</span><button onclick="add('OXVA Xlim Pro',35)">Tambah</button></div>
+<div class="product"><span>Freebase - $7</span><button onclick="add('Freebase',7)">Tambah</button></div>
 </div>
 
-<div class="sub-category" onclick="toggle('cartidge')">Cartridge</div>
-<div id="cartidge" class="products">
-  <div class="product">OXVA Pod Cartridge - $5 <button onclick="add('Cartridge',5)">Add</button></div>
-</div>
+<div id="toast">Produk berhasil ditambahkan.</div>
 
-<div class="sub-category" onclick="toggle('liq')">Liquid</div>
-<div id="liq" class="products">
-
-  <div class="product">Freebase - $7 <button onclick="add('Freebase',7)">Add</button></div>
-  <div class="product">Saltnic Fruity - $8 <button onclick="add('Saltnic Fruity',8)">Add</button></div>
-  <div class="product">Saltnic Creamy - $8 <button onclick="add('Saltnic Creamy',8)">Add</button></div>
-
-</div>
-
-</div>
-
-<!-- ROKOK -->
-<div class="category" onclick="toggle('rokok')">🚬 Rokok Indonesia</div>
-<div id="rokok" class="sub">
-<div class="product">Gudang Garam - $18 <button onclick="add('Gudang Garam',18)">Add</button></div>
-</div>
-
-<!-- OBAT -->
-<div class="category" onclick="toggle('obat')">💊 Obat Indonesia</div>
-<div id="obat" class="sub">
-
-<div class="sub-category" onclick="toggle('umum')">Obat Umum</div>
-<div id="umum" class="products">
-  <div class="product">Paracetamol - $3 <button onclick="add('Paracetamol',3)">Add</button></div>
-</div>
-
-<div class="sub-category" onclick="toggle('adult')">Obat 18+</div>
-<div id="adult" class="products">
-  <div class="product">Private Product - $10 <button onclick="add('Private',10)">Add</button></div>
-</div>
-
-</div>
-
-<!-- CART PANEL -->
-<div class="cart-panel" id="cartPanel">
-<h3>🛒 Keranjang</h3>
+<div id="cart">
+<h2>Keranjang</h2>
 <div id="items"></div>
-<div>Total: $<span id="total">0</span></div>
-<button class="checkout disabled" id="checkoutBtn" disabled onclick="checkout()">Checkout Telegram</button>
+<h3>Total: $<span id="total">0</span></h3>
+<button class="checkout" onclick="checkout()">Checkout Telegram</button>
 </div>
 
 <script>
-
-let cart = [];
-
-// TOGGLE MENU
-function toggle(id){
-let el = document.getElementById(id);
-el.style.display = (el.style.display==="block")?"none":"block";
-}
-
-// ADD CART
-function add(name,price){
-cart.push({name,price});
-updateCart();
-}
-
-// UPDATE CART
-function updateCart(){
-
-let items = document.getElementById("items");
-let total = 0;
-
-document.getElementById("cartCount").innerText = cart.length;
-
-if(cart.length===0){
-items.innerHTML="Kosong";
-}else{
-items.innerHTML = cart.map(c=>{
-total += c.price;
-return "• "+c.name+" - $"+c.price;
-}).join("<br>");
-}
-
-document.getElementById("total").innerText = total;
-
-let btn = document.getElementById("checkoutBtn");
-
-if(total>=10){
-btn.disabled=false;
-btn.classList.remove("disabled");
-}else{
-btn.disabled=true;
-btn.classList.add("disabled");
-}
-}
-
-// CART OPEN CLOSE
-function toggleCart(){
-let c = document.getElementById("cartPanel");
-c.style.display = (c.style.display==="block")?"none":"block";
-}
-
-// CHECKOUT
-function checkout(){
-
-let total = cart.reduce((a,b)=>a+b.price,0);
-
-let msg = "🛒 MexCloud Order:%0A";
-
-cart.forEach(c=>{
-msg += "- "+c.name+" ($"+c.price+")%0A";
-});
-
-msg += "%0A💰 Total: $"+total;
-
-window.open("https://t.me/MexCloudStore?text="+msg,"_blank");
-}
-
+let cart=[];
+function tg(id){let e=document.getElementById(id);e.style.display=e.style.display=="block"?"none":"block";}
+cartBtn.onclick=()=>cart.classList.toggle('open');
+function add(n,p){cart.push({n,p});upd();toast.style.display='block';setTimeout(()=>toast.style.display='none',1800);}
+function rem(i){cart.splice(i,1);upd();}
+function upd(){count.innerText=cart.length;let t=0;items.innerHTML=cart.map((x,i)=>{t+=x.p;return `<div class=item><span>${x.n} - $${x.p}</span><button class="remove" onclick="rem(${i})">Hapus</button></div>`}).join('');total.innerText=t;}
+function checkout(){let txt="🛒 MexCloud Order%0A";let tot=0;cart.forEach(x=>{tot+=x.p;txt+=`- ${x.n} ($${x.p})%0A`});txt+=`%0ATotal: $${tot}`;open("https://t.me/MexCloudStore?text="+txt)}
+setInterval(()=>{fire.style.opacity=1;setTimeout(()=>fire.style.opacity=0,800)},4000);
 </script>
-
-</body>
-</html>
+</body></html>
