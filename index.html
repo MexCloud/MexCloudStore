@@ -1,165 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MexCloud Store</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-
-<header>
-
-<div class="logo">
-
-🐉 MexCloud Store
-
-</div>
-
-
-<div class="search">
-
-<input
-type="text"
-placeholder="Cari produk..."
-id="search">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-</div>
-
-
-<div class="cart-button" id="cartBtn">
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-<span id="count">0</span>
-
-</div>
-
-</header>
-
-
-
-<section class="hero">
-
-<div class="cloud-overlay"></div>
-
-<img
-src="logo.png"
-class="dragon-logo">
-
-<h1>MexCloud Store</h1>
-
-<p>
-
-Premium Digital Marketplace
-
-</p>
-
-</section>
-
-
-
-<section class="category-area">
-
-<h2>
-
-Kategori
-
-</h2>
-
-</section>
-
-
-
-<section id="productList">
-
-<!-- Produk nanti -->
-
-</section>
-
-
-
-<div id="toast">
-
-Produk berhasil ditambahkan
-
-</div>
-
-
-
-<div id="cart">
-
-<div class="cart-header">
-
-<h2>
-
-Keranjang
-
-</h2>
-
-<i
-class="fa-solid fa-xmark"
-id="closeCart">
-
-</i>
-
-</div>
-
-<div id="items">
-
-</div>
-
-<div class="cart-footer">
-
-<h3>
-
-Total :
-$
-
-<span id="total">
-
-0
-
-</span>
-
-</h3>
-
-<button id="checkout">
-
-Checkout Telegram
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
+<style>
 
 /* =========================
    GLOBAL
@@ -173,7 +21,7 @@ Checkout Telegram
 }
 
 body{
-    background:linear-gradient(180deg,#ffffff,#f3e8ff,#ede9fe);
+    background:linear-gradient(180deg,#fff,#f3e8ff,#ede9fe);
     overflow-x:hidden;
 }
 
@@ -188,60 +36,37 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    padding:15px 25px;
-
-    background:rgba(139,92,246,0.85);
+    padding:15px 20px;
+    background:rgba(139,92,246,.85);
     backdrop-filter:blur(15px);
-
     color:white;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 .logo{
-    font-size:20px;
     font-weight:700;
 }
 
-/* SEARCH */
-
 .search{
-    position:relative;
     flex:1;
-    margin:0 20px;
+    margin:0 15px;
+    position:relative;
 }
 
 .search input{
     width:100%;
-    padding:10px 40px 10px 15px;
+    padding:10px 35px 10px 12px;
     border:none;
-    border-radius:30px;
+    border-radius:25px;
     outline:none;
 }
 
-.search i{
-    position:absolute;
-    right:15px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#888;
-}
-
-/* CART */
-
-.cart-button{
-    position:relative;
-    cursor:pointer;
-    font-size:22px;
+.cart-btn{
     background:white;
     color:#7c3aed;
     padding:10px 14px;
     border-radius:50px;
-    transition:.3s;
-}
-
-.cart-button:hover{
-    transform:scale(1.05);
+    cursor:pointer;
+    position:relative;
 }
 
 #count{
@@ -251,93 +76,103 @@ header{
     background:red;
     color:white;
     font-size:12px;
-    width:20px;
-    height:20px;
+    width:18px;
+    height:18px;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     border-radius:50%;
 }
 
 /* =========================
-   HERO / BANNER AWAN
+   HERO
 ========================= */
 
 .hero{
-    position:relative;
     text-align:center;
-    padding:80px 20px;
-    overflow:hidden;
+    padding:60px 20px;
+    position:relative;
 }
 
-/* awan background */
-.cloud-overlay{
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at top,#ffffff 0%,#f5f3ff 40%,#ede9fe 100%);
-    z-index:-2;
-}
-
-/* glow ungu */
-.cloud-overlay::before{
-    content:"";
-    position:absolute;
-    width:600px;
-    height:600px;
-    background:rgba(168,85,247,0.25);
-    filter:blur(120px);
-    top:-200px;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-/* LOGO NAGA */
-
-.dragon-logo{
-    width:280px;
-    max-width:80%;
+.hero img{
+    width:200px;
     animation:float 5s ease-in-out infinite;
-    filter:drop-shadow(0 0 25px rgba(168,85,247,0.5));
+    filter:drop-shadow(0 0 20px rgba(139,92,246,.4));
 }
-
-/* TEXT */
 
 .hero h1{
-    font-size:40px;
-    margin-top:15px;
     color:#6d28d9;
 }
 
-.hero p{
-    margin-top:10px;
-    color:#666;
-}
-
-/* FLOAT ANIMATION */
-
 @keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
-    100%{transform:translateY(0);}
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+    100%{transform:translateY(0)}
 }
 
 /* =========================
-   CATEGORY
+   PRODUCTS
 ========================= */
 
-.category-area{
-    padding:30px;
-    font-size:22px;
-    font-weight:600;
-    color:#4c1d95;
-}
-
-/* =========================
-   PRODUCT LIST (basic dulu)
-========================= */
-
-#productList{
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
     padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.price{
+    color:#7c3aed;
+    font-weight:700;
+    margin:8px 0;
+}
+
+button{
+    background:#7c3aed;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* =========================
+   CART
+========================= */
+
+#cart{
+    position:fixed;
+    right:-400px;
+    top:0;
+    width:350px;
+    height:100%;
+    background:white;
+    transition:.3s;
+    padding:15px;
+    box-shadow:-10px 0 20px rgba(0,0,0,.2);
+}
+
+#cart.open{
+    right:0;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    margin:10px 0;
 }
 
 /* =========================
@@ -346,475 +181,145 @@ header{
 
 #toast{
     position:fixed;
-    top:90px;
+    top:80px;
     right:20px;
     background:#22c55e;
     color:white;
-    padding:12px 18px;
-    border-radius:10px;
+    padding:10px 15px;
+    border-radius:8px;
     display:none;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* =========================
-   CART PANEL (SIDEBAR)
-========================= */
+</style>
 
-#cart{
-    position:fixed;
-    top:0;
-    right:-420px;
-    width:380px;
-    height:100%;
-    background:white;
-    box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-    transition:.3s;
-    z-index:9999;
-    padding:20px;
-}
+</head>
 
-#cart.open{
-    right:0;
-}
+<body>
 
-.cart-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+<header>
 
-.cart-footer{
-    position:absolute;
-    bottom:20px;
-    width:90%;
-}
+<div class="logo">🐉 MexCloud Store</div>
 
-#checkout{
-    width:100%;
-    padding:12px;
-    background:#7c3aed;
-    color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-}
+<div class="search">
+<input id="search" onkeyup="search()" placeholder="Cari produk...">
+</div>
 
-/* =========================
-   RESPONSIVE
-========================= */
+<div class="cart-btn" onclick="toggleCart()">
+🛒 <span id="count">0</span>
+</div>
 
-@media(max-width:768px){
+</header>
 
-header{
-    flex-direction:column;
-    gap:10px;
-}
 
-.search{
-    width:100%;
-}
+<div class="hero">
+<img src="logo.png">
+<h1>MexCloud Store</h1>
+<p>Premium Digital Marketplace</p>
+</div>
 
-.hero h1{
-    font-size:28px;
-}
 
-.dragon-logo{
-    width:200px;
-}
+<div class="product-grid" id="list">
 
-#cart{
-    width:100%;
-}
+<div class="card">
+<h3>iPhone 15 Pro</h3>
+<div class="price">$900</div>
+<button onclick="add('iPhone 15 Pro',900)">Tambah</button>
+</div>
 
-}
-<section id="productList">
-   <div class="product-grid">
+<div class="card">
+<h3>Samsung S25 Ultra</h3>
+<div class="price">$950</div>
+<button onclick="add('Samsung S25 Ultra',950)">Tambah</button>
+</div>
 
-    <div class="product-card">
-        <h3>📱 iPhone 15 Pro</h3>
-        <p class="desc">Apple flagship premium</p>
-        <div class="price">$900</div>
-        <button onclick="addToCart('iPhone 15 Pro',900)">Tambah</button>
-    </div>
-
-    <div class="product-card">
-        <h3>📱 Samsung S25 Ultra</h3>
-        <p class="desc">Android flagship beast</p>
-        <div class="price">$950</div>
-        <button onclick="addToCart('Samsung S25 Ultra',950)">Tambah</button>
-    </div>
-
-    <div class="product-card">
-        <h3>💨 OXVA Xlim Pro</h3>
-        <p class="desc">Pod premium vapor</p>
-        <div class="price">$35</div>
-        <button onclick="addToCart('OXVA Xlim Pro',35)">Tambah</button>
-    </div>
+<div class="card">
+<h3>OXVA Pod</h3>
+<div class="price">$35</div>
+<button onclick="add('OXVA Pod',35)">Tambah</button>
+</div>
 
 </div>
 
-/* =========================
-   PRODUCT GRID
-========================= */
 
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+<div id="toast">Ditambahkan!</div>
+
+
+<div id="cart">
+
+<h3>Keranjang</h3>
+<div id="items"></div>
+<h3>Total: $<span id="total">0</span></h3>
+
+<button onclick="checkout()">Checkout Telegram</button>
+
+</div>
+
+
+<script>
+
+let cart=[];
+
+function add(n,p){
+cart.push({n,p});
+update();
+toast();
 }
 
-/* CARD */
+function update(){
 
-.product-card{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    transition:.3s;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
+let items=document.getElementById("items");
+let count=document.getElementById("count");
+let total=0;
 
-.product-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(124,58,237,0.25);
-}
+items.innerHTML="";
 
-/* TEXT */
-
-.product-card h3{
-    color:#4c1d95;
-    margin-bottom:10px;
-}
-
-.desc{
-    font-size:14px;
-    color:#666;
-    margin-bottom:10px;
-}
-
-/* PRICE */
-
-.price{
-    font-size:18px;
-    font-weight:700;
-    color:#7c3aed;
-    margin-bottom:15px;
-}
-
-/* BUTTON */
-
-.product-card button{
-    background:#7c3aed;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.product-card button:hover{
-    background:#5b21b6;
-    transform:scale(1.05);
-}
-   function addToCart(name, price){
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.push({name, price});
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    updateCartCount();
-
-    showToast();
-
-}
-   
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// =========================
-// ADD TO CART
-// =========================
-function addToCart(name, price){
-
-    cart.push({name, price});
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    updateCart();
-
-    showToast();
-}
-
-// =========================
-// REMOVE ITEM
-// =========================
-function removeItem(index){
-
-    cart.splice(index, 1);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    updateCart();
-}
-
-// =========================
-// UPDATE CART UI
-// =========================
-function updateCart(){
-
-    const items = document.getElementById("items");
-    const totalEl = document.getElementById("total");
-    const countEl = document.getElementById("count");
-
-    let total = 0;
-
-    items.innerHTML = "";
-
-    cart.forEach((item, index)=>{
-
-        total += item.price;
-
-        items.innerHTML += `
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            margin:10px 0;
-            padding:10px;
-            border-bottom:1px solid #eee;
-        ">
-
-            <div>
-                <b>${item.name}</b><br>
-                <small>$${item.price}</small>
-            </div>
-
-            <button onclick="removeItem(${index})"
-            style="
-                background:red;
-                color:white;
-                border:none;
-                padding:5px 10px;
-                border-radius:8px;
-                cursor:pointer;
-            ">
-            Hapus
-            </button>
-
-        </div>
-        `;
-    });
-
-    totalEl.innerText = total;
-    countEl.innerText = cart.length;
-}
-
-// =========================
-// TOAST
-// =========================
-function showToast(){
-
-    const toast = document.getElementById("toast");
-
-    toast.style.display = "block";
-
-    setTimeout(()=>{
-
-        toast.style.display = "none";
-
-    }, 1500);
-
-}
-
-// =========================
-// OPEN / CLOSE CART
-// =========================
-document.addEventListener("DOMContentLoaded",()=>{
-
-    const cartBox = document.getElementById("cart");
-    const cartBtn = document.getElementById("cartBtn");
-    const closeBtn = document.getElementById("closeCart");
-
-    cartBtn.onclick = ()=> cartBox.classList.add("open");
-    closeBtn.onclick = ()=> cartBox.classList.remove("open");
-
-    updateCart();
-
+cart.forEach((c,i)=>{
+total+=c.p;
+items.innerHTML+=`
+<div class="item">
+<span>${c.n} - $${c.p}</span>
+<button onclick="removeItem(${i})">Hapus</button>
+</div>`;
 });
-   
-#items{
-    max-height:65vh;
-    overflow-y:auto;
+
+count.innerText=cart.length;
+document.getElementById("total").innerText=total;
 }
 
-/* scroll lebih halus */
-#items::-webkit-scrollbar{
-    width:6px;
+function removeItem(i){
+cart.splice(i,1);
+update();
 }
 
-#items::-webkit-scrollbar-thumb{
-    background:#a855f7;
-    border-radius:10px;
-}
-   function searchProduct(){
-
-    let input = document.getElementById("search").value.toLowerCase();
-
-    let cards = document.querySelectorAll(".product-card");
-
-    cards.forEach(card => {
-
-        let text = card.innerText.toLowerCase();
-
-        if(text.includes(input)){
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-
-    });
-
-}
-   function checkout(){
-
-    if(cart.length === 0){
-        alert("Keranjang masih kosong!");
-        return;
-    }
-
-    let message = "🛒 MexCloud Order\n\n";
-
-    let total = 0;
-
-    cart.forEach((item, i)=>{
-
-        message += `${i+1}. ${item.name} - $${item.price}\n`;
-
-        total += item.price;
-
-    });
-
-    message += `\n💰 Total: $${total}`;
-
-    let encoded = encodeURIComponent(message);
-
-    let telegramURL = `https://t.me/MexCloudStore?text=${encoded}`;
-
-    window.open(telegramURL, "_blank");
-
-}
-   <button id="checkout" onclick="checkout()">
-Checkout Telegram
-</button>
-
-.product-card{
-    transition:0.25s ease;
+function toast(){
+let t=document.getElementById("toast");
+t.style.display="block";
+setTimeout(()=>t.style.display="none",1500);
 }
 
-.product-card:hover{
-    transform:translateY(-10px) scale(1.02);
-}
-   
-/* =========================
-   DRAGON BACKGROUND
-========================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    background:url("dragon-bg.png") center/contain no-repeat;
-
-    opacity:0.05;
-
-    animation:dragonMove 20s linear infinite;
-
-    pointer-events:none;
-
-    z-index:-1;
+function toggleCart(){
+document.getElementById("cart").classList.toggle("open");
 }
 
-@keyframes dragonMove{
-    0%{
-        transform:translateY(0px) scale(1);
-    }
-    50%{
-        transform:translateY(-20px) scale(1.03);
-    }
-    100%{
-        transform:translateY(0px) scale(1);
-    }
+function search(){
+let val=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(val)?"block":"none";
+});
 }
 
-/* =========================
-   FIRE EFFECT
-========================= */
-
-.fire-effect{
-    position:fixed;
-    font-size:40px;
-    opacity:0;
-    pointer-events:none;
-    animation:fireAnim 1.2s ease-out forwards;
-    z-index:9999;
+function checkout(){
+let msg="🛒 MexCloud Order\n\n";
+let total=0;
+cart.forEach(c=>{
+msg+=`${c.n} - $${c.p}\n`;
+total+=c.p;
+});
+msg+=`\nTotal: $${total}`;
+window.open("https://t.me/MexCloudStore?text="+encodeURIComponent(msg));
 }
 
-@keyframes fireAnim{
-    0%{
-        transform:translateY(0) scale(0.5);
-        opacity:0;
-    }
-    30%{
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-80px) scale(1.2);
-        opacity:0;
-    }
-}
-   
-// =========================
-// FIRE RANDOM EFFECT
-// =========================
+</script>
 
-function spawnFire(){
-
-    const fire = document.createElement("div");
-
-    fire.className = "fire-effect";
-
-    fire.innerHTML = "🔥";
-
-    fire.style.left = Math.random() * window.innerWidth + "px";
-
-    fire.style.top = (window.innerHeight - 100) + "px";
-
-    document.body.appendChild(fire);
-
-    setTimeout(()=>{
-
-        fire.remove();
-
-    },1200);
-
-}
-
-// tiap 4 detik
-setInterval(spawnFire, 4000);
-   
-button{
-    transition:0.2s ease;
-}
-
-button:hover{
-    transform:scale(1.05);
-    filter:brightness(1.1);
-}
-
-.product-card{
-    backdrop-filter:blur(10px);
-}
+</body>
+</html>
