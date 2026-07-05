@@ -57,6 +57,48 @@ body {
   50% { transform: translate(-50%, -50%) translateY(-12px); }
   100% { transform: translate(-50%, -50%) translateY(0px); }
 }
+
+/* BRAND */
+.brand {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 52px;
+  margin: 0;
+  color: white;
+  font-weight: 800;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-top: 10px;
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* SEARCH */
+.search-box {
+  position: absolute;
+  top: 28%;
+  width: 100%;
+  text-align: center;
+  z-index: 6;
+}
+
+.search-box input {
+  width: 50%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
 </style>
 </head>
 
@@ -68,7 +110,16 @@ body {
   <img class="cloud cloud1" src="./cloud.png?v=1">
   <img class="cloud cloud2" src="./cloud.png?v=1">
   <img class="cloud cloud3" src="./cloud.png?v=1">
-
+  
+  <div class="brand">
+  <h1 class="title">MexCloud Store</h1>
+  <h2 class="subtitle">BREATH THE VIBES</h2>
+</div>
+  
+  <div class="search-box">
+  <input type="text" placeholder="Cari produk...">
+</div>
+  
   <!-- DRAGON -->
   <img class="dragon" src="./dragon.png?v=1" alt="dragon">
 
