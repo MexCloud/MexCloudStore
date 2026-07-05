@@ -13,7 +13,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* HERO / LANGIT */
+/* LANGIT */
 .hero {
   position: relative;
   width: 100%;
@@ -22,79 +22,72 @@ body {
   overflow: hidden;
 }
 
-/* CLOUD */
+/* CLOUD DASAR */
 .cloud {
   position: absolute;
   background: #fff;
   border-radius: 50%;
-  animation: moveClouds 70s linear infinite;
+  opacity: 0.9;
+  animation: moveClouds 60s linear infinite;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
 }
 
-/* bentuk awan */
-.cloud::before {
-  content: "";
-  position: absolute;
-  background: #fff;
-  width: 120%;
-  height: 120%;
-  top: -40%;
-  left: 10%;
-  border-radius: 50%;
-}
-
+/* BENTUK AWAN (KAPAS) */
+.cloud::before,
 .cloud::after {
   content: "";
   position: absolute;
   background: #fff;
-  width: 140%;
-  height: 140%;
-  top: -60%;
-  right: 5%;
   border-radius: 50%;
 }
 
-/* VARIASI CLOUD */
+.cloud::before {
+  width: 120%;
+  height: 120%;
+  top: -40%;
+  left: 15%;
+}
+
+.cloud::after {
+  width: 140%;
+  height: 140%;
+  top: -60%;
+  right: 10%;
+}
+
+/* POSISI AWAN */
 .cloud1 {
   width: 260px;
-  height: 90px;
-  top: 80px;
+  height: 80px;
+  top: 100px;
   left: -300px;
 }
 
 .cloud2 {
   width: 320px;
-  height: 100px;
-  top: 200px;
-  left: -400px;
-  animation-duration: 85s;
+  height: 90px;
+  top: 220px;
+  left: -450px;
+  animation-duration: 75s;
 }
 
 .cloud3 {
   width: 240px;
-  height: 80px;
+  height: 75px;
   top: 350px;
   left: -250px;
-  animation-duration: 75s;
+  animation-duration: 65s;
 }
 
 .cloud4 {
-  width: 300px;
-  height: 95px;
-  top: 130px;
+  width: 280px;
+  height: 85px;
+  top: 160px;
   left: -500px;
-  animation-duration: 90s;
+  animation-duration: 85s;
 }
 
-.cloud5 {
-  width: 220px;
-  height: 75px;
-  top: 260px;
-  left: -450px;
-  animation-duration: 80s;
-}
-
-/* ANIMASI */
+/* GERAK */
 @keyframes moveClouds {
   from { transform: translateX(0); }
   to { transform: translateX(160vw); }
@@ -103,12 +96,12 @@ body {
 </head>
 
 <body>
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
 
-<div class="cloud cloud4"></div>
-<div class="cloud cloud5"></div>
+<div class="hero">
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
 </div>
 
 </body>
