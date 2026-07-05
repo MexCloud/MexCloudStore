@@ -21,8 +21,9 @@
 }
 
 body{
-    background:linear-gradient(180deg,#fff,#f3e8ff,#ede9fe);
+    background: radial-gradient(circle at top, #1a0b2e, #0a0612);
     overflow-x:hidden;
+    color:white;
 }
 
 /* =========================
@@ -37,7 +38,7 @@ header{
     justify-content:space-between;
     align-items:center;
     padding:15px 20px;
-    background:rgba(139,92,246,.85);
+    background:rgba(124,58,237,.75);
     backdrop-filter:blur(15px);
     color:white;
 }
@@ -52,20 +53,39 @@ header{
     padding:10px 12px;
     border:none;
     border-radius:25px;
+    outline:none;
 }
 
 /* =========================
-   HERO + FIRE EFFECT
+   HERO
 ========================= */
 
 .hero{
     text-align:center;
-    padding:80px 20px;
+    padding:100px 20px 70px;
     position:relative;
     overflow:hidden;
 }
 
-/* FIRE BACKGROUND */
+/* CLOUDS */
+.clouds{
+    position:absolute;
+    top:0;
+    left:0;
+    width:200%;
+    height:100%;
+    background:url("https://i.ibb.co/2n3Z6hR/cloud.png");
+    opacity:0.07;
+    animation:moveCloud 60s linear infinite;
+    z-index:0;
+}
+
+@keyframes moveCloud{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+}
+
+/* FIRE */
 .fire{
     position:absolute;
     top:50%;
@@ -73,40 +93,46 @@ header{
     transform:translate(-50%,-50%);
     width:500px;
     height:500px;
-    background:radial-gradient(circle, rgba(255,80,0,0.8), transparent 60%);
-    filter:blur(30px);
-    animation:fireAnim 1.5s infinite alternate;
+    background:radial-gradient(circle, rgba(255,80,0,0.5), transparent 65%);
+    filter:blur(35px);
+    animation:fireAnim 2s infinite alternate;
     z-index:0;
 }
 
 @keyframes fireAnim{
-    0%{transform:translate(-50%,-50%) scale(1);}
-    100%{transform:translate(-50%,-50%) scale(1.2);}
+    from{transform:translate(-50%,-50%) scale(1);}
+    to{transform:translate(-50%,-50%) scale(1.15);}
+}
+
+/* CONTENT */
+.hero *{
+    position:relative;
+    z-index:2;
 }
 
 .logo-big{
-    width:260px;
-    position:relative;
-    z-index:2;
+    width:240px;
     animation:float 5s ease-in-out infinite;
-    filter:drop-shadow(0 0 25px orange);
+    filter:drop-shadow(0 0 25px rgba(255,165,0,.5));
 }
 
 @keyframes float{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
-    100%{transform:translateY(0)}
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
 }
 
 .title{
-    font-size:32px;
+    font-size:34px;
     font-weight:700;
-    color:#5b21b6;
+    margin-top:10px;
+    letter-spacing:2px;
 }
 
 .subtitle{
     letter-spacing:3px;
-    color:#7c3aed;
+    opacity:0.7;
+    margin-top:5px;
 }
 
 /* =========================
@@ -121,16 +147,32 @@ header{
 }
 
 .card{
-    background:white;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
     padding:15px;
     border-radius:12px;
     text-align:center;
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    backdrop-filter:blur(10px);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
 }
 
 .price{
-    color:#7c3aed;
+    color:#c084fc;
     font-weight:700;
+    margin:5px 0;
+}
+
+button{
+    padding:8px 12px;
+    border:none;
+    border-radius:8px;
+    background:#7c3aed;
+    color:white;
+    cursor:pointer;
 }
 
 /* =========================
@@ -144,9 +186,11 @@ header{
     width:350px;
     height:100%;
     background:white;
+    color:black;
     transition:.3s;
     padding:15px;
-    box-shadow:-10px 0 20px rgba(0,0,0,.2);
+    box-shadow:-10px 0 20px rgba(0,0,0,.3);
+    z-index:9999;
 }
 
 #cart.open{right:0}
@@ -178,7 +222,6 @@ header{
     background:#7c3aed;
     color:white;
     border:none;
-    cursor:pointer;
 }
 
 /* TOAST */
@@ -190,6 +233,7 @@ header{
     color:white;
     padding:10px;
     display:none;
+    border-radius:8px;
 }
 
 </style>
@@ -199,15 +243,19 @@ header{
 
 <header>
 <div class="logo">🐉 MexCloud Store</div>
+
 <div class="search">
 <input id="search" onkeyup="render()" placeholder="Cari produk...">
 </div>
+
 <div onclick="toggleCart()">🛒 Cart</div>
 </header>
 
 <!-- HERO -->
 <div class="hero">
+<div class="clouds"></div>
 <div class="fire"></div>
+
 <img src="logo.png" class="logo-big">
 <h1 class="title">MexCloud Store</h1>
 <p class="subtitle">Breath The Vibe</p>
@@ -225,7 +273,7 @@ header{
 <h3>Total: $<span id="total">0</span></h3>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 <div id="admin">
 <h3>Admin Panel</h3>
 <input id="pname" placeholder="Nama Produk">
@@ -236,6 +284,7 @@ header{
 <script>
 
 let cart=[];
+
 let products = JSON.parse(localStorage.getItem("products")) || [
     {name:"iPhone 15 Pro",price:900},
     {name:"Samsung S25 Ultra",price:950},
@@ -280,12 +329,10 @@ let total=0;
 
 items.innerHTML="";
 
-cart.forEach((c,i)=>{
+cart.forEach((c)=>{
 total+=c.p;
 items.innerHTML+=`
-<div>
-${c.n} - $${c.p}
-</div>`;
+<div>${c.n} - $${c.p}</div>`;
 });
 
 document.getElementById("total").innerText=total;
@@ -301,7 +348,6 @@ function toggleCart(){
 document.getElementById("cart").classList.toggle("open");
 }
 
-/* ADMIN ADD PRODUCT */
 function addProduct(){
 let n=document.getElementById("pname").value;
 let p=parseInt(document.getElementById("pprice").value);
