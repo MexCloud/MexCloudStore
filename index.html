@@ -25,38 +25,64 @@ body {
 /* AWAN */
 .cloud {
   position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: moveClouds 40s linear infinite;
+  background: #fff;
+  border-radius: 100px;
+  opacity: 0.9;
+  animation: moveClouds 50s linear infinite;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.08));
 }
 
+/* BAGIAN KAPAS UTAMA */
+.cloud::before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 70%;
+  height: 120%;
+  top: -30%;
+  left: 10%;
+  border-radius: 50%;
+}
+
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 90%;
+  height: 140%;
+  top: -40%;
+  right: 10%;
+  border-radius: 50%;
+}
+
+/* VARIASI AWAN */
 .cloud1 {
-  width: 180px;
-  height: 60px;
+  width: 220px;
+  height: 70px;
   top: 80px;
-  left: -200px;
+  left: -250px;
 }
 
 .cloud2 {
-  width: 220px;
-  height: 70px;
+  width: 280px;
+  height: 80px;
   top: 200px;
-  left: -300px;
-  animation-duration: 50s;
+  left: -350px;
+  animation-duration: 60s;
 }
 
 .cloud3 {
-  width: 160px;
-  height: 55px;
+  width: 200px;
+  height: 65px;
   top: 350px;
-  left: -250px;
-  animation-duration: 45s;
+  left: -300px;
+  animation-duration: 55s;
 }
 
+/* GERAK */
 @keyframes moveClouds {
   from { transform: translateX(0); }
-  to { transform: translateX(140vw); }
+  to { transform: translateX(150vw); }
 }
 </style>
 </head>
