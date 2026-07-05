@@ -25,20 +25,18 @@ body {
 /* CLOUD DASAR */
 .cloud {
   position: absolute;
-  background: #fff;
-  border-radius: 50%;
+  width: 250px;
   opacity: 0.9;
-  animation: moveClouds 70s linear infinite;
-  filter: blur(0.6px);
+  animation: moveClouds 60s linear infinite;
 }
 
-/* banyak “blob kecil” jadi 1 awan */
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: #fff;
-  border-radius: 50%;
+.cloud1 { top: 80px; left: -300px; }
+.cloud2 { top: 200px; left: -400px; animation-duration: 80s; }
+.cloud3 { top: 350px; left: -250px; animation-duration: 70s; }
+
+@keyframes moveClouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(160vw); }
 }
 
 /* blob kiri */
@@ -88,10 +86,9 @@ body {
 <body>
 
 <div class="hero">
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-  <div class="cloud cloud3"></div>
-  <div class="cloud cloud4"></div>
+<img class="cloud cloud1" src="https://i.ibb.co/7QpKsCX/cloud1.png">
+<img class="cloud cloud2" src="https://i.ibb.co/7QpKsCX/cloud1.png">
+<img class="cloud cloud3" src="https://i.ibb.co/7QpKsCX/cloud1.png">
 </div>
 
 </body>
