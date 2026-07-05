@@ -5,276 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MexCloud Store</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-    background:#0a0612;
-    color:white;
-    font-family:'Poppins',sans-serif;
-    overflow-x:hidden;
+  margin:0;
+  overflow:hidden;
+  font-family:Arial;
+  background: radial-gradient(circle at top, #1a1f3c, #050611);
+  color:white;
 }
 
-/* =========================
-   HERO BANNER
-========================= */
-
-.hero{
-    height:85vh;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    overflow:hidden;
+/* ===== AWAN MULTI LAYER ===== */
+.clouds, .clouds2 {
+  position:absolute;
+  width:200%;
+  height:300px;
+  background:url("https://i.imgur.com/3QKQ9hY.png") repeat-x;
+  opacity:0.2;
 }
 
-/* CLOUD ANIMATION */
 .clouds{
-    position:absolute;
-    top:0;
-    left:0;
-    width:200%;
-    height:100%;
-    background:url("https://i.ibb.co/2n3Z6hR/cloud.png");
-    opacity:0.08;
-    animation:moveCloud 60s linear infinite;
-    z-index:0;
+  top:0;
+  animation:moveClouds 60s linear infinite;
 }
 
-@keyframes moveCloud{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
+.clouds2{
+  top:50px;
+  opacity:0.1;
+  animation:moveClouds 120s linear infinite reverse;
 }
 
-/* DRAGON */
+@keyframes moveClouds{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ===== CENTER ===== */
+.container{
+  position:relative;
+  z-index:5;
+  text-align:center;
+  top:120px;
+}
+
+/* ===== DRAGON ===== */
 .dragon{
-    position:absolute;
-    width:420px;
-    animation:float 5s ease-in-out infinite;
-    z-index:2;
-    filter:drop-shadow(0 0 30px rgba(255,100,0,0.4));
+  width:260px;
+  filter:drop-shadow(0 0 25px red);
+  animation:float 3s ease-in-out infinite;
 }
 
-/* FIRE BREATH */
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+/* ===== FIRE BLAST ===== */
 .fire{
-    position:absolute;
-    width:120px;
-    height:120px;
-    background:radial-gradient(circle, rgba(255,120,0,0.9), transparent 70%);
-    filter:blur(10px);
-    opacity:0;
-    z-index:3;
-    animation:fireBurst 4s infinite;
+  position:absolute;
+  top:140px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,80,0,0.9), transparent 70%);
+  filter:blur(10px);
+  opacity:0;
 }
 
-@keyframes fireBurst{
-    0%{opacity:0; transform:scale(0.5);}
-    50%{opacity:1; transform:scale(1.5);}
-    100%{opacity:0; transform:scale(2);}
+/* animasi tembakan api */
+.fire.active{
+  animation:blast 1s ease-out;
 }
 
-/* TEXT */
+@keyframes blast{
+  0%{width:0;height:0;opacity:0;}
+  30%{width:120px;height:120px;opacity:1;}
+  100%{width:300px;height:300px;opacity:0;}
+}
+
+/* ===== TEXT ===== */
 .title{
-    font-family:'Cinzel',serif;
-    font-size:42px;
-    letter-spacing:3px;
-    z-index:4;
-    position:relative;
+  font-size:42px;
+  font-weight:bold;
+  background:linear-gradient(90deg,gold,orange,red);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .subtitle{
-    font-size:14px;
-    letter-spacing:4px;
-    opacity:0.7;
-    margin-top:5px;
-    z-index:4;
-    position:relative;
+  font-size:18px;
+  opacity:0.8;
+  margin-top:10px;
 }
-
-/* FLOAT ANIMATION */
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
-    100%{transform:translateY(0);}
-}
-
-/* =========================
-   PRODUCTS
-========================= */
-
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-    padding:20px;
-}
-
-.card{
-    background:#111;
-    border:1px solid rgba(255,255,255,0.1);
-    padding:15px;
-    border-radius:12px;
-    text-align:center;
-    transition:.2s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.price{
-    color:#ff8c00;
-    font-weight:700;
-    margin:5px 0;
-}
-
-/* BUTTON */
-button{
-    background:#ff6a00;
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    color:white;
-    cursor:pointer;
-}
-
-/* CART */
-#cart{
-    position:fixed;
-    right:-400px;
-    top:0;
-    width:350px;
-    height:100%;
-    background:white;
-    color:black;
-    padding:15px;
-    transition:.3s;
-    z-index:9999;
-}
-
-#cart.open{right:0}
-
-/* ADMIN */
-#admin{
-    position:fixed;
-    right:0;
-    bottom:0;
-    width:300px;
-    background:#111;
-    color:white;
-    padding:15px;
-}
-
-#admin input{
-    width:100%;
-    padding:8px;
-    margin:5px 0;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-
 <div class="clouds"></div>
+<div class="clouds2"></div>
 
-<img src="https://i.ibb.co/0s3Q5yG/dragon.png" class="dragon">
+<div class="container">
 
-<div class="fire" style="top:45%; left:55%;"></div>
+  <!-- DRAGON (SVG inline biar aman & gak error hosting) -->
+  <svg class="dragon" viewBox="0 0 512 512">
+    <path fill="red" d="M256 30c60 40 80 90 70 140-10 50-60 80-60 120s60 70 90 120c-80-20-120-60-140-110-20 50-60 90-140 110 30-50 90-90 90-130s-50-70-60-120C166 120 196 70 256 30z"/>
+  </svg>
 
-<div>
-<h1 class="title">MexCloud Store</h1>
-<p class="subtitle">BREATH THE VIBE</p>
-</div>
+  <div class="fire" id="fire"></div>
 
-</div>
+  <div class="title">MexCloud Store</div>
+  <div class="subtitle">Breath The Vibe</div>
 
-<!-- PRODUCTS -->
-<div class="product-grid" id="list"></div>
-
-<!-- CART -->
-<div id="cart">
-<h3>Cart</h3>
-<div id="items"></div>
-<h3>Total: $<span id="total">0</span></h3>
-</div>
-
-<!-- ADMIN -->
-<div id="admin">
-<h3>Admin Panel</h3>
-<input id="pname" placeholder="Nama Produk">
-<input id="pprice" placeholder="Harga">
-<button onclick="addProduct()">Tambah</button>
 </div>
 
 <script>
+const fire = document.getElementById("fire");
 
-let cart=[];
+function blastFire(){
+  fire.classList.add("active");
 
-let products=[
-{name:"iPhone 15 Pro",price:900},
-{name:"Samsung S25 Ultra",price:950},
-{name:"OXVA Pod",price:35}
-];
-
-function render(){
-let list=document.getElementById("list");
-list.innerHTML="";
-
-products.forEach(p=>{
-list.innerHTML+=`
-<div class="card">
-<h3>${p.name}</h3>
-<div class="price">$${p.price}</div>
-<button onclick="add('${p.name}',${p.price})">Tambah</button>
-</div>`;
-});
+  setTimeout(()=>{
+    fire.classList.remove("active");
+  }, 1000);
 }
 
-function add(n,p){
-cart.push({n,p});
-update();
-}
+// tiap 4 detik nyembur api
+setInterval(blastFire, 4000);
 
-function update(){
-let items=document.getElementById("items");
-let total=0;
-
-items.innerHTML="";
-
-cart.forEach(c=>{
-total+=c.p;
-items.innerHTML+=`<div>${c.n} - $${c.p}</div>`;
-});
-
-document.getElementById("total").innerText=total;
-}
-
-function addProduct(){
-let n=document.getElementById("pname").value;
-let p=parseInt(document.getElementById("pprice").value);
-
-products.push({name:n,price:p});
-render();
-}
-
-render();
-
+// langsung start pertama
+blastFire();
 </script>
 
 </body>
