@@ -23,15 +23,16 @@ body {
 }
 
 /* AWAN */
-.cloud {
+  .cloud {
   position: absolute;
   background: white;
-  border-radius: 50px;
-  opacity: 0.8;
+  border-radius: 50%;
+  opacity: 0.85;
   filter: blur(1px);
-  animation: moveClouds 30s linear infinite;
+  animation: moveClouds 40s linear infinite;
 }
 
+/* bikin awan jadi “berlapis” */
 .cloud::before,
 .cloud::after {
   content: "";
@@ -40,7 +41,21 @@ body {
   border-radius: 50%;
 }
 
-/* variasi awan */
+.cloud::before {
+  width: 120%;
+  height: 120%;
+  top: -30%;
+  left: 15%;
+}
+
+.cloud::after {
+  width: 140%;
+  height: 140%;
+  top: -40%;
+  right: 15%;
+}
+
+/* VARIASI AWAN */
 .cloud1 {
   width: 200px;
   height: 60px;
@@ -53,7 +68,7 @@ body {
   height: 70px;
   top: 200px;
   left: -300px;
-  animation-duration: 40s;
+  animation-duration: 50s;
 }
 
 .cloud3 {
@@ -61,7 +76,14 @@ body {
   height: 55px;
   top: 350px;
   left: -250px;
-  animation-duration: 35s;
+  animation-duration: 45s;
+}
+/* GERAK AWAN */
+@keyframes moveClouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(140vw); }
+}
+
 }
 
 @keyframes moveClouds {
