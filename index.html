@@ -13,7 +13,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* LANGIT */
 .hero {
   position: relative;
   width: 100%;
@@ -22,7 +21,6 @@ body {
   overflow: hidden;
 }
 
-/* CLOUD DASAR */
 .cloud {
   position: absolute;
   width: 250px;
@@ -33,48 +31,6 @@ body {
 .cloud1 { top: 80px; left: -300px; }
 .cloud2 { top: 200px; left: -400px; animation-duration: 80s; }
 .cloud3 { top: 350px; left: -250px; animation-duration: 70s; }
-
-@keyframes moveClouds {
-  from { transform: translateX(0); }
-  to { transform: translateX(160vw); }
-}
-
-/* blob kiri */
-.cloud::before {
-  content: "";
-  position: absolute;
-  width: 90%;
-  height: 120%;
-  top: -30%;
-  left: 5%;
-  background: #fff;
-  border-radius: 60% 40% 60% 40%;
-}
-
-.cloud::after {
-  content: "";
-  position: absolute;
-  width: 110%;
-  height: 130%;
-  top: -50%;
-  right: 0;
-  background: #fff;
-  border-radius: 40% 60% 50% 50%;
-}
-
-/* tambahan blob tengah (INI YANG BIKIN NGGAK BULAT) */
-.cloud {
-  box-shadow:
-    60px -20px 0 0 #fff,
-    120px 0px 0 0 #fff,
-    30px 20px 0 0 #fff,
-    90px 30px 0 0 #fff;
-}
-
-/* VARIASI */
-.cloud1 { width: 180px; height: 60px; top: 100px; left: -250px; }
-.cloud2 { width: 220px; height: 70px; top: 220px; left: -400px; animation-duration: 80s; }
-.cloud3 { width: 160px; height: 55px; top: 350px; left: -300px; animation-duration: 75s; }
 
 @keyframes moveClouds {
   from { transform: translateX(0); }
