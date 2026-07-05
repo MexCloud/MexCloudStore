@@ -13,7 +13,9 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.hero {
+.hero 
+  <img class="dragon" src="dragon.png" alt="dragon">
+  {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -35,6 +37,22 @@ body {
 @keyframes moveClouds {
   from { transform: translateX(0); }
   to { transform: translateX(160vw); }
+}
+  .dragon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  z-index: 10;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  animation: floatDragon 4s ease-in-out infinite;
+}
+
+@keyframes floatDragon {
+  0% { transform: translate(-50%, -50%) translateY(0px); }
+  50% { transform: translate(-50%, -50%) translateY(-12px); }
+  100% { transform: translate(-50%, -50%) translateY(0px); }
 }
 </style>
 </head>
