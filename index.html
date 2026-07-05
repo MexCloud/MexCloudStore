@@ -25,11 +25,35 @@ body {
 /* AWAN */
 .cloud {
   position: absolute;
+  background: #fff;
+  border-radius: 100px;
+  opacity: 0.9;
+  filter: blur(0.5px);
+  animation: moveClouds 35s linear infinite;
+}
+
+/* bikin awan lebih “berlapis” */
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
   background: white;
-  border-radius: 50px;
-  opacity: 0.8;
-  filter: blur(1px);
-  animation: moveClouds 30s linear infinite;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 60%;
+  height: 120%;
+  top: -30%;
+  left: 10%;
+}
+
+.cloud::after {
+  width: 70%;
+  height: 140%;
+  top: -40%;
+  right: 10%;
+}
 }
 
 .cloud::before,
