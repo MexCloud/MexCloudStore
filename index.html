@@ -5,157 +5,320 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MexCloud Store</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
 body{
-  margin:0;
-  overflow:hidden;
-  background: radial-gradient(circle at top, #0b0f2a, #050611);
-  font-family:Arial, sans-serif;
-  color:white;
+    background:linear-gradient(180deg,#fff,#f3e8ff,#ede9fe);
+    overflow-x:hidden;
 }
 
-/* ===== CLOUD (PURE CSS, NO IMAGE) ===== */
-.clouds::before,
-.clouds::after{
-  content:"";
-  position:absolute;
-  width:200%;
-  height:300px;
-  background: radial-gradient(circle, rgba(255,255,255,0.12) 10%, transparent 60%);
-  animation:move 80s linear infinite;
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    background:rgba(139,92,246,.85);
+    backdrop-filter:blur(15px);
+    color:white;
 }
 
-.clouds::after{
-  top:60px;
-  opacity:0.5;
-  animation-duration:140s;
+.logo{
+    font-weight:700;
 }
 
-@keyframes move{
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
+.search{
+    flex:1;
+    margin:0 15px;
+    position:relative;
 }
 
-/* ===== CENTER ===== */
-.center{
-  position:absolute;
-  top:120px;
-  width:100%;
-  text-align:center;
-  z-index:5;
+.search input{
+    width:100%;
+    padding:10px 35px 10px 12px;
+    border:none;
+    border-radius:25px;
+    outline:none;
 }
 
-/* ===== DRAGON WRAPPER ===== */
-.dragon-wrap{
-  position:relative;
-  display:inline-block;
+.cart-btn{
+    background:white;
+    color:#7c3aed;
+    padding:10px 14px;
+    border-radius:50px;
+    cursor:pointer;
+    position:relative;
 }
 
-/* glow */
-.glow{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:380px;
-  height:380px;
-  background:radial-gradient(circle, rgba(255,0,0,0.25), transparent 70%);
-  filter:blur(25px);
-  animation:pulse 2s infinite;
+#count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:red;
+    color:white;
+    font-size:12px;
+    width:18px;
+    height:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
 }
 
-@keyframes pulse{
-  0%,100%{transform:translate(-50%,-50%) scale(1); opacity:0.4;}
-  50%{transform:translate(-50%,-50%) scale(1.15); opacity:0.8;}
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align:center;
+    padding:60px 20px;
+    position:relative;
 }
 
-/* dragon */
-.dragon{
-  width:320px;
-  filter:drop-shadow(0 0 25px red);
-  animation:float 3s ease-in-out infinite;
+.hero img{
+    width:200px;
+    animation:float 5s ease-in-out infinite;
+    filter:drop-shadow(0 0 20px rgba(139,92,246,.4));
+}
+
+.hero h1{
+    color:#6d28d9;
 }
 
 @keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+    100%{transform:translateY(0)}
 }
 
-/* ===== FIRE ===== */
-.fire{
-  position:absolute;
-  left:50%;
-  top:160px;
-  transform:translateX(-50%);
-  width:10px;
-  height:10px;
-  background:radial-gradient(circle, orange, red, transparent);
-  border-radius:50%;
-  opacity:0;
-  filter:blur(2px);
+/* =========================
+   PRODUCTS
+========================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    padding:20px;
 }
 
-.fire.active{
-  animation:blast 1s ease-out;
+.card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.2s;
 }
 
-@keyframes blast{
-  0%{width:10px;height:10px;opacity:0;}
-  30%{opacity:1;}
-  100%{width:520px;height:140px;opacity:0;}
+.card:hover{
+    transform:translateY(-5px);
 }
 
-/* ===== TEXT ===== */
-.title{
-  font-size:48px;
-  font-weight:bold;
-  background:linear-gradient(90deg,gold,orange,red);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.price{
+    color:#7c3aed;
+    font-weight:700;
+    margin:8px 0;
 }
 
-.sub{
-  font-size:18px;
-  opacity:0.8;
-  margin-top:8px;
+button{
+    background:#7c3aed;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
 }
+
+/* =========================
+   CART
+========================= */
+
+#cart{
+    position:fixed;
+    right:-400px;
+    top:0;
+    width:350px;
+    height:100%;
+    background:white;
+    transition:.3s;
+    padding:15px;
+    box-shadow:-10px 0 20px rgba(0,0,0,.2);
+}
+
+#cart.open{
+    right:0;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    margin:10px 0;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+    position:fixed;
+    top:80px;
+    right:20px;
+    background:#22c55e;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    display:none;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="clouds"></div>
+<header>
 
-<div class="center">
+<div class="logo">🐉 MexCloud Store</div>
 
-  <div class="dragon-wrap">
+<div class="search">
+<input id="search" onkeyup="search()" placeholder="Cari produk...">
+</div>
 
-    <div class="glow"></div>
+<div class="cart-btn" onclick="toggleCart()">
+🛒 <span id="count">0</span>
+</div>
 
-    <!-- DRAGON (PURE SVG, NO IMAGE LINK) -->
-    <svg class="dragon" viewBox="0 0 512 512">
-      <path fill="#ff2b2b" d="M256 35c75 45 115 120 95 190-15 55-70 85-70 130 0 55 75 85 120 135-110-25-160-80-185-140-25 60-75 115-185 140 45-50 120-80 120-135 0-45-55-75-70-130C141 155 181 80 256 35z"/>
-    </svg>
+</header>
 
-    <div class="fire" id="fire"></div>
 
-  </div>
+<div class="hero">
+<img src="logo.png">
+<h1>MexCloud Store</h1>
+<p>Premium Digital Marketplace</p>
+</div>
 
-  <div class="title">MexCloud Store</div>
-  <div class="sub">Breath The Vibe</div>
+
+<div class="product-grid" id="list">
+
+<div class="card">
+<h3>iPhone 15 Pro</h3>
+<div class="price">$900</div>
+<button onclick="add('iPhone 15 Pro',900)">Tambah</button>
+</div>
+
+<div class="card">
+<h3>Samsung S25 Ultra</h3>
+<div class="price">$950</div>
+<button onclick="add('Samsung S25 Ultra',950)">Tambah</button>
+</div>
+
+<div class="card">
+<h3>OXVA Pod</h3>
+<div class="price">$35</div>
+<button onclick="add('OXVA Pod',35)">Tambah</button>
+</div>
 
 </div>
 
-<script>
-const fire = document.getElementById("fire");
 
-function breatheFire(){
-  fire.classList.add("active");
-  setTimeout(()=>fire.classList.remove("active"),1000);
+<div id="toast">Ditambahkan!</div>
+
+
+<div id="cart">
+
+<h3>Keranjang</h3>
+<div id="items"></div>
+<h3>Total: $<span id="total">0</span></h3>
+
+<button onclick="checkout()">Checkout Telegram</button>
+
+</div>
+
+
+<script>
+
+let cart=[];
+
+function add(n,p){
+cart.push({n,p});
+update();
+toast();
 }
 
-setInterval(breatheFire,4000);
-breatheFire();
+function update(){
+
+let items=document.getElementById("items");
+let count=document.getElementById("count");
+let total=0;
+
+items.innerHTML="";
+
+cart.forEach((c,i)=>{
+total+=c.p;
+items.innerHTML+=`
+<div class="item">
+<span>${c.n} - $${c.p}</span>
+<button onclick="removeItem(${i})">Hapus</button>
+</div>`;
+});
+
+count.innerText=cart.length;
+document.getElementById("total").innerText=total;
+}
+
+function removeItem(i){
+cart.splice(i,1);
+update();
+}
+
+function toast(){
+let t=document.getElementById("toast");
+t.style.display="block";
+setTimeout(()=>t.style.display="none",1500);
+}
+
+function toggleCart(){
+document.getElementById("cart").classList.toggle("open");
+}
+
+function search(){
+let val=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(val)?"block":"none";
+});
+}
+
+function checkout(){
+let msg="🛒 MexCloud Order\n\n";
+let total=0;
+cart.forEach(c=>{
+msg+=`${c.n} - $${c.p}\n`;
+total+=c.p;
+});
+msg+=`\nTotal: $${total}`;
+window.open("https://t.me/MexCloudStore?text="+encodeURIComponent(msg));
+}
+
 </script>
 
 </body>
