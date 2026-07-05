@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MexCloud Store</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,57 +17,30 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
 }
 
 body{
-    background: radial-gradient(circle at top, #1a0b2e, #0a0612);
+    background:#0a0612;
+    color:white;
+    font-family:'Poppins',sans-serif;
     overflow-x:hidden;
-    color:white;
 }
 
 /* =========================
-   HEADER
-========================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:999;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 20px;
-    background:rgba(124,58,237,.75);
-    backdrop-filter:blur(15px);
-    color:white;
-}
-
-.search{
-    flex:1;
-    margin:0 15px;
-}
-
-.search input{
-    width:100%;
-    padding:10px 12px;
-    border:none;
-    border-radius:25px;
-    outline:none;
-}
-
-/* =========================
-   HERO
+   HERO BANNER
 ========================= */
 
 .hero{
-    text-align:center;
-    padding:100px 20px 70px;
+    height:85vh;
     position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
     overflow:hidden;
 }
 
-/* CLOUDS */
+/* CLOUD ANIMATION */
 .clouds{
     position:absolute;
     top:0;
@@ -75,7 +48,7 @@ header{
     width:200%;
     height:100%;
     background:url("https://i.ibb.co/2n3Z6hR/cloud.png");
-    opacity:0.07;
+    opacity:0.08;
     animation:moveCloud 60s linear infinite;
     z-index:0;
 }
@@ -85,54 +58,56 @@ header{
     to{transform:translateX(-50%);}
 }
 
-/* FIRE */
+/* DRAGON */
+.dragon{
+    position:absolute;
+    width:420px;
+    animation:float 5s ease-in-out infinite;
+    z-index:2;
+    filter:drop-shadow(0 0 30px rgba(255,100,0,0.4));
+}
+
+/* FIRE BREATH */
 .fire{
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:500px;
-    height:500px;
-    background:radial-gradient(circle, rgba(255,80,0,0.5), transparent 65%);
-    filter:blur(35px);
-    animation:fireAnim 2s infinite alternate;
-    z-index:0;
+    width:120px;
+    height:120px;
+    background:radial-gradient(circle, rgba(255,120,0,0.9), transparent 70%);
+    filter:blur(10px);
+    opacity:0;
+    z-index:3;
+    animation:fireBurst 4s infinite;
 }
 
-@keyframes fireAnim{
-    from{transform:translate(-50%,-50%) scale(1);}
-    to{transform:translate(-50%,-50%) scale(1.15);}
+@keyframes fireBurst{
+    0%{opacity:0; transform:scale(0.5);}
+    50%{opacity:1; transform:scale(1.5);}
+    100%{opacity:0; transform:scale(2);}
 }
 
-/* CONTENT */
-.hero *{
-    position:relative;
-    z-index:2;
-}
-
-.logo-big{
-    width:240px;
-    animation:float 5s ease-in-out infinite;
-    filter:drop-shadow(0 0 25px rgba(255,165,0,.5));
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-    100%{transform:translateY(0);}
-}
-
+/* TEXT */
 .title{
-    font-size:34px;
-    font-weight:700;
-    margin-top:10px;
-    letter-spacing:2px;
+    font-family:'Cinzel',serif;
+    font-size:42px;
+    letter-spacing:3px;
+    z-index:4;
+    position:relative;
 }
 
 .subtitle{
-    letter-spacing:3px;
+    font-size:14px;
+    letter-spacing:4px;
     opacity:0.7;
     margin-top:5px;
+    z-index:4;
+    position:relative;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
 }
 
 /* =========================
@@ -147,12 +122,11 @@ header{
 }
 
 .card{
-    background:rgba(255,255,255,0.05);
+    background:#111;
     border:1px solid rgba(255,255,255,0.1);
     padding:15px;
     border-radius:12px;
     text-align:center;
-    backdrop-filter:blur(10px);
     transition:.2s;
 }
 
@@ -161,24 +135,22 @@ header{
 }
 
 .price{
-    color:#c084fc;
+    color:#ff8c00;
     font-weight:700;
     margin:5px 0;
 }
 
+/* BUTTON */
 button{
-    padding:8px 12px;
+    background:#ff6a00;
     border:none;
+    padding:8px 12px;
     border-radius:8px;
-    background:#7c3aed;
     color:white;
     cursor:pointer;
 }
 
-/* =========================
-   CART
-========================= */
-
+/* CART */
 #cart{
     position:fixed;
     right:-400px;
@@ -187,18 +159,14 @@ button{
     height:100%;
     background:white;
     color:black;
-    transition:.3s;
     padding:15px;
-    box-shadow:-10px 0 20px rgba(0,0,0,.3);
+    transition:.3s;
     z-index:9999;
 }
 
 #cart.open{right:0}
 
-/* =========================
-   ADMIN PANEL
-========================= */
-
+/* ADMIN */
 #admin{
     position:fixed;
     right:0;
@@ -207,33 +175,12 @@ button{
     background:#111;
     color:white;
     padding:15px;
-    z-index:9999;
 }
 
 #admin input{
     width:100%;
+    padding:8px;
     margin:5px 0;
-    padding:8px;
-}
-
-#admin button{
-    width:100%;
-    padding:8px;
-    background:#7c3aed;
-    color:white;
-    border:none;
-}
-
-/* TOAST */
-#toast{
-    position:fixed;
-    top:80px;
-    right:20px;
-    background:#22c55e;
-    color:white;
-    padding:10px;
-    display:none;
-    border-radius:8px;
 }
 
 </style>
@@ -241,30 +188,24 @@ button{
 
 <body>
 
-<header>
-<div class="logo">🐉 MexCloud Store</div>
-
-<div class="search">
-<input id="search" onkeyup="render()" placeholder="Cari produk...">
-</div>
-
-<div onclick="toggleCart()">🛒 Cart</div>
-</header>
-
 <!-- HERO -->
 <div class="hero">
-<div class="clouds"></div>
-<div class="fire"></div>
 
-<img src="logo.png" class="logo-big">
+<div class="clouds"></div>
+
+<img src="https://i.ibb.co/0s3Q5yG/dragon.png" class="dragon">
+
+<div class="fire" style="top:45%; left:55%;"></div>
+
+<div>
 <h1 class="title">MexCloud Store</h1>
-<p class="subtitle">Breath The Vibe</p>
+<p class="subtitle">BREATH THE VIBE</p>
+</div>
+
 </div>
 
 <!-- PRODUCTS -->
 <div class="product-grid" id="list"></div>
-
-<div id="toast">Ditambahkan</div>
 
 <!-- CART -->
 <div id="cart">
@@ -278,33 +219,24 @@ button{
 <h3>Admin Panel</h3>
 <input id="pname" placeholder="Nama Produk">
 <input id="pprice" placeholder="Harga">
-<button onclick="addProduct()">Tambah Produk</button>
+<button onclick="addProduct()">Tambah</button>
 </div>
 
 <script>
 
 let cart=[];
 
-let products = JSON.parse(localStorage.getItem("products")) || [
-    {name:"iPhone 15 Pro",price:900},
-    {name:"Samsung S25 Ultra",price:950},
-    {name:"OXVA Pod",price:35}
+let products=[
+{name:"iPhone 15 Pro",price:900},
+{name:"Samsung S25 Ultra",price:950},
+{name:"OXVA Pod",price:35}
 ];
 
-function save(){
-localStorage.setItem("products",JSON.stringify(products));
-}
-
 function render(){
-
 let list=document.getElementById("list");
-let search=document.getElementById("search").value?.toLowerCase()||"";
-
 list.innerHTML="";
 
-products
-.filter(p=>p.name.toLowerCase().includes(search))
-.forEach((p,i)=>{
+products.forEach(p=>{
 list.innerHTML+=`
 <div class="card">
 <h3>${p.name}</h3>
@@ -312,53 +244,33 @@ list.innerHTML+=`
 <button onclick="add('${p.name}',${p.price})">Tambah</button>
 </div>`;
 });
-
-save();
 }
 
 function add(n,p){
 cart.push({n,p});
 update();
-toast();
 }
 
 function update(){
-
 let items=document.getElementById("items");
 let total=0;
 
 items.innerHTML="";
 
-cart.forEach((c)=>{
+cart.forEach(c=>{
 total+=c.p;
-items.innerHTML+=`
-<div>${c.n} - $${c.p}</div>`;
+items.innerHTML+=`<div>${c.n} - $${c.p}</div>`;
 });
 
 document.getElementById("total").innerText=total;
-}
-
-function toast(){
-let t=document.getElementById("toast");
-t.style.display="block";
-setTimeout(()=>t.style.display="none",1200);
-}
-
-function toggleCart(){
-document.getElementById("cart").classList.toggle("open");
 }
 
 function addProduct(){
 let n=document.getElementById("pname").value;
 let p=parseInt(document.getElementById("pprice").value);
 
-if(!n||!p)return;
-
 products.push({name:n,price:p});
 render();
-
-document.getElementById("pname").value="";
-document.getElementById("pprice").value="";
 }
 
 render();
