@@ -6,117 +6,291 @@
 <title>MexCloud Store</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
-body {
-  overflow: hidden;
-  background: black;
+body{
+background:black;
+overflow-x:hidden;
+color:white;
 }
 
-/* Background awan (video) */
-.bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  filter: brightness(0.6);
+/* ===== BACKGROUND AWAN ===== */
+.bg-video{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(0.5);
 }
 
-/* Overlay gelap biar premium */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
-  z-index: -1;
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle,rgba(0,0,0,0.3),rgba(0,0,0,0.95));
+z-index:-1;
 }
 
-/* Container */
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/* ===== HEADER ===== */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.4);
+position:sticky;
+top:0;
+z-index:10;
 }
 
-/* Logo naga */
-.dragon {
-  width: 300px;
-  animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px red);
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-/* Animasi api glow */
-@keyframes fireGlow {
-  0%, 100% { filter: drop-shadow(0 0 10px red); }
-  50% { filter: drop-shadow(0 0 30px orange); }
+.logo img{
+width:40px;
 }
 
-.dragon.fire {
-  animation: fireGlow 0.6s ease-in-out;
+.logo h1{
+font-size:20px;
 }
 
-/* teks */
-.title {
-  font-size: 48px;
-  font-weight: bold;
-  color: white;
-  letter-spacing: 2px;
-  margin-top: 20px;
+.search{
+flex:1;
+margin:0 15px;
 }
 
-.subtitle {
-  font-size: 20px;
-  color: #ccc;
-  margin-top: 10px;
+.search input{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:none;
+outline:none;
 }
 
-/* floating */
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+/* cart */
+.cart{
+background:red;
+padding:8px 12px;
+border-radius:10px;
+cursor:pointer;
 }
+
+/* ===== HERO ===== */
+.hero{
+text-align:center;
+padding:30px 10px;
+}
+
+.hero img{
+width:200px;
+animation:float 3s infinite ease-in-out;
+filter:drop-shadow(0 0 20px red);
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+/* ===== PRODUCT GRID ===== */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:15px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.card h3{
+font-size:16px;
+margin-bottom:5px;
+}
+
+.card p{
+font-size:14px;
+color:#aaa;
+}
+
+.price{
+margin-top:8px;
+color:#00ff99;
+font-weight:bold;
+}
+
+.card button{
+margin-top:10px;
+width:100%;
+padding:8px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:red;
+color:white;
+}
+
+/* ===== CART PANEL ===== */
+.cart-panel{
+position:fixed;
+right:-350px;
+top:0;
+width:300px;
+height:100%;
+background:black;
+border-left:1px solid #333;
+padding:15px;
+transition:0.3s;
+z-index:999;
+}
+
+.cart-panel.active{
+right:0;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+border-bottom:1px solid #333;
+padding-bottom:5px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO BACKGROUND AWAN -->
+<!-- AWAN VIDEO -->
 <video class="bg-video" autoplay muted loop>
-  <source src="https://cdn.pixabay.com/video/2023/06/20/169070-838331871_large.mp4" type="video/mp4">
+<source src="https://cdn.pixabay.com/video/2023/06/20/169070-838331871_large.mp4">
 </video>
-
 <div class="overlay"></div>
 
-<div class="container">
-  <img id="dragon" class="dragon" src="logo.png" />
+<!-- HEADER -->
+<header>
+<div class="logo">
+<img src="logo.png">
+<h1>MexCloud</h1>
+</div>
 
-  <div class="title">MexCloud Store</div>
-  <div class="subtitle">Breath The Vibe</div>
+<div class="search">
+<input type="text" id="search" placeholder="Cari produk...">
+</div>
+
+<div class="cart" onclick="toggleCart()">
+🛒 <span id="cartCount">0</span>
+</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+<img src="logo.png">
+<h2>MexCloud Store</h2>
+<p>Breath The Vibe</p>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products" id="productList"></div>
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+<h3>Keranjang</h3>
+<div id="cartItems"></div>
 </div>
 
 <script>
-// animasi api tiap 4 detik
-setInterval(() => {
-  const dragon = document.getElementById("dragon");
-  dragon.classList.add("fire");
+// ===== DATA PRODUK (BISA KAMU GANTI) =====
+const products = [
+{ id:1, name:"Product A", price:120000 },
+{ id:2, name:"Product B", price:250000 },
+{ id:3, name:"Product C", price:99000 },
+{ id:4, name:"Product D", price:150000 },
+];
 
-  setTimeout(() => {
-    dragon.classList.remove("fire");
-  }, 600);
-}, 4000);
+// ===== CART =====
+let cart = [];
+
+// render product
+function renderProducts(filter=""){
+const list = document.getElementById("productList");
+list.innerHTML="";
+
+products
+.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+.forEach(p=>{
+list.innerHTML += `
+<div class="card">
+<h3>${p.name}</h3>
+<p>Digital Product</p>
+<div class="price">Rp ${p.price}</div>
+<button onclick="addCart(${p.id})">Tambah</button>
+</div>
+`;
+});
+}
+
+// add cart
+function addCart(id){
+const item = products.find(p=>p.id===id);
+cart.push(item);
+updateCart();
+}
+
+// update cart
+function updateCart(){
+document.getElementById("cartCount").innerText = cart.length;
+
+const box = document.getElementById("cartItems");
+box.innerHTML="";
+
+cart.forEach((c,i)=>{
+box.innerHTML += `
+<div class="item">
+<span>${c.name}</span>
+<button onclick="removeItem(${i})">X</button>
+</div>
+`;
+});
+}
+
+// remove
+function removeItem(i){
+cart.splice(i,1);
+updateCart();
+}
+
+// search
+document.getElementById("search").addEventListener("input",(e)=>{
+renderProducts(e.target.value);
+});
+
+// toggle cart
+function toggleCart(){
+document.getElementById("cartPanel").classList.toggle("active");
+}
+
+// init
+renderProducts();
 </script>
 
 </body>
