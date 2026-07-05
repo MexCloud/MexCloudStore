@@ -23,65 +23,67 @@ body {
 }
 
 /* AWAN */
-  .cloud {
+.cloud {
   position: absolute;
-  background: white;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f2f2f2);
   border-radius: 50%;
-  opacity: 0.85;
-  filter: blur(1px);
-  animation: moveClouds 40s linear infinite;
+  opacity: 0.9;
+  filter: blur(0.3px);
+  animation: moveClouds linear infinite;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-/* bikin awan jadi “berlapis” */
+/* layer awan biar “kapas” */
 .cloud::before,
 .cloud::after {
   content: "";
   position: absolute;
-  background: white;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f5f5f5);
   border-radius: 50%;
 }
 
 .cloud::before {
-  width: 120%;
-  height: 120%;
+  width: 70%;
+  height: 70%;
   top: -30%;
   left: 15%;
 }
 
 .cloud::after {
-  width: 140%;
-  height: 140%;
+  width: 90%;
+  height: 90%;
   top: -40%;
-  right: 15%;
+  right: 10%;
 }
 
-/* VARIASI AWAN */
+/* variasi */
 .cloud1 {
-  width: 200px;
-  height: 60px;
+  width: 220px;
+  height: 70px;
   top: 80px;
-  left: -200px;
+  left: -250px;
 }
 
 .cloud2 {
-  width: 250px;
-  height: 70px;
+  width: 280px;
+  height: 80px;
   top: 200px;
-  left: -300px;
-  animation-duration: 50s;
+  left: -350px;
+  animation-duration: 55s;
 }
 
 .cloud3 {
-  width: 180px;
-  height: 55px;
+  width: 200px;
+  height: 65px;
   top: 350px;
-  left: -250px;
+  left: -300px;
   animation-duration: 45s;
 }
-/* GERAK AWAN */
+
 @keyframes moveClouds {
   from { transform: translateX(0); }
-  to { transform: translateX(140vw); }
+  to { transform: translateX(150vw); }
+}
 }
 
 }
