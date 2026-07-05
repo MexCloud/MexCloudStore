@@ -6,292 +6,73 @@
 <title>MexCloud Store</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-body{
-background:black;
-overflow-x:hidden;
-color:white;
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6ec6ff, #ffffff);
+  overflow: hidden;
 }
 
-/* ===== BACKGROUND AWAN ===== */
-.bg-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-filter:brightness(0.5);
+/* CLOUD */
+.cloud {
+  position: absolute;
+  width: 250px;
+  opacity: 0.9;
+  animation: moveClouds 60s linear infinite;
+  pointer-events: none;
 }
 
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:radial-gradient(circle,rgba(0,0,0,0.3),rgba(0,0,0,0.95));
-z-index:-1;
+.cloud1 { top: 80px; left: -300px; }
+.cloud2 { top: 200px; left: -400px; animation-duration: 80s; }
+.cloud3 { top: 350px; left: -250px; animation-duration: 70s; }
+
+@keyframes moveClouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(160vw); }
 }
 
-/* ===== HEADER ===== */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 20px;
-backdrop-filter:blur(10px);
-background:rgba(0,0,0,0.4);
-position:sticky;
-top:0;
-z-index:10;
+/* DRAGON */
+.dragon {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 370px;
+  z-index: 10;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  animation: floatDragon 4s ease-in-out infinite;
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
+@keyframes floatDragon {
+  0% { transform: translate(-50%, -50%) translateY(0px); }
+  50% { transform: translate(-50%, -50%) translateY(-12px); }
+  100% { transform: translate(-50%, -50%) translateY(0px); }
 }
-
-.logo img{
-width:40px;
-}
-
-.logo h1{
-font-size:20px;
-}
-
-.search{
-flex:1;
-margin:0 15px;
-}
-
-.search input{
-width:100%;
-padding:10px;
-border-radius:10px;
-border:none;
-outline:none;
-}
-
-/* cart */
-.cart{
-background:red;
-padding:8px 12px;
-border-radius:10px;
-cursor:pointer;
-}
-
-/* ===== HERO ===== */
-.hero{
-text-align:center;
-padding:30px 10px;
-}
-
-.hero img{
-width:200px;
-animation:float 3s infinite ease-in-out;
-filter:drop-shadow(0 0 20px red);
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-15px);}
-}
-
-/* ===== PRODUCT GRID ===== */
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-padding:15px;
-border-radius:15px;
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.1);
-}
-
-.card h3{
-font-size:16px;
-margin-bottom:5px;
-}
-
-.card p{
-font-size:14px;
-color:#aaa;
-}
-
-.price{
-margin-top:8px;
-color:#00ff99;
-font-weight:bold;
-}
-
-.card button{
-margin-top:10px;
-width:100%;
-padding:8px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-background:red;
-color:white;
-}
-
-/* ===== CART PANEL ===== */
-.cart-panel{
-position:fixed;
-right:-350px;
-top:0;
-width:300px;
-height:100%;
-background:black;
-border-left:1px solid #333;
-padding:15px;
-transition:0.3s;
-z-index:999;
-}
-
-.cart-panel.active{
-right:0;
-}
-
-.item{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-border-bottom:1px solid #333;
-padding-bottom:5px;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- AWAN VIDEO -->
-<video class="bg-video" autoplay muted loop>
-<source src="https://cdn.pixabay.com/video/2023/06/20/169070-838331871_large.mp4">
-</video>
-<div class="overlay"></div>
-
-<!-- HEADER -->
-<header>
-<div class="logo">
-<img src="logo.png">
-<h1>MexCloud</h1>
-</div>
-
-<div class="search">
-<input type="text" id="search" placeholder="Cari produk...">
-</div>
-
-<div class="cart" onclick="toggleCart()">
-🛒 <span id="cartCount">0</span>
-</div>
-</header>
-
-<!-- HERO -->
 <div class="hero">
-<img src="logo.png">
-<h2>MexCloud Store</h2>
-<p>Breath The Vibe</p>
+
+  <!-- CLOUD (pakai cache buster biar GitHub gak ngelag) -->
+  <img class="cloud cloud1" src="./cloud.png?v=1">
+  <img class="cloud cloud2" src="./cloud.png?v=1">
+  <img class="cloud cloud3" src="./cloud.png?v=1">
+
+  <!-- DRAGON -->
+  <img class="dragon" src="./dragon.png?v=1" alt="dragon">
+
 </div>
-
-<!-- PRODUCTS -->
-<div class="products" id="productList"></div>
-
-<!-- CART -->
-<div class="cart-panel" id="cartPanel">
-<h3>Keranjang</h3>
-<div id="cartItems"></div>
-</div>
-
-<script>
-// ===== DATA PRODUK (BISA KAMU GANTI) =====
-const products = [
-{ id:1, name:"Product A", price:120000 },
-{ id:2, name:"Product B", price:250000 },
-{ id:3, name:"Product C", price:99000 },
-{ id:4, name:"Product D", price:150000 },
-];
-
-// ===== CART =====
-let cart = [];
-
-// render product
-function renderProducts(filter=""){
-const list = document.getElementById("productList");
-list.innerHTML="";
-
-products
-.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
-.forEach(p=>{
-list.innerHTML += `
-<div class="card">
-<h3>${p.name}</h3>
-<p>Digital Product</p>
-<div class="price">Rp ${p.price}</div>
-<button onclick="addCart(${p.id})">Tambah</button>
-</div>
-`;
-});
-}
-
-// add cart
-function addCart(id){
-const item = products.find(p=>p.id===id);
-cart.push(item);
-updateCart();
-}
-
-// update cart
-function updateCart(){
-document.getElementById("cartCount").innerText = cart.length;
-
-const box = document.getElementById("cartItems");
-box.innerHTML="";
-
-cart.forEach((c,i)=>{
-box.innerHTML += `
-<div class="item">
-<span>${c.name}</span>
-<button onclick="removeItem(${i})">X</button>
-</div>
-`;
-});
-}
-
-// remove
-function removeItem(i){
-cart.splice(i,1);
-updateCart();
-}
-
-// search
-document.getElementById("search").addEventListener("input",(e)=>{
-renderProducts(e.target.value);
-});
-
-// toggle cart
-function toggleCart(){
-document.getElementById("cartPanel").classList.toggle("active");
-}
-
-// init
-renderProducts();
-</script>
 
 </body>
 </html>
