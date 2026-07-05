@@ -10,38 +10,25 @@ body{
   margin:0;
   overflow:hidden;
   background: radial-gradient(circle at top, #0b0f2a, #050611);
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   color:white;
 }
 
-/* ===== CLOUD LAYERS ===== */
-.cloud {
+/* ===== CLOUD (PURE CSS, NO IMAGE) ===== */
+.clouds::before,
+.clouds::after{
+  content:"";
   position:absolute;
-  width:300%;
+  width:200%;
   height:300px;
-  background:url("https://i.imgur.com/3QKQ9hY.png");
-  opacity:0.15;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 10%, transparent 60%);
   animation:move 80s linear infinite;
 }
 
-.cloud2 {
-  position:absolute;
-  top:40px;
-  width:300%;
-  height:300px;
-  background:url("https://i.imgur.com/3QKQ9hY.png");
-  opacity:0.08;
-  animation:move 140s linear infinite reverse;
-}
-
-.cloud3 {
-  position:absolute;
-  top:80px;
-  width:300%;
-  height:300px;
-  background:url("https://i.imgur.com/3QKQ9hY.png");
-  opacity:0.05;
-  animation:move 200s linear infinite;
+.clouds::after{
+  top:60px;
+  opacity:0.5;
+  animation-duration:140s;
 }
 
 @keyframes move{
@@ -58,41 +45,47 @@ body{
   z-index:5;
 }
 
-/* ===== DRAGON ===== */
+/* ===== DRAGON WRAPPER ===== */
+.dragon-wrap{
+  position:relative;
+  display:inline-block;
+}
+
+/* glow */
+.glow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:380px;
+  height:380px;
+  background:radial-gradient(circle, rgba(255,0,0,0.25), transparent 70%);
+  filter:blur(25px);
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1); opacity:0.4;}
+  50%{transform:translate(-50%,-50%) scale(1.15); opacity:0.8;}
+}
+
+/* dragon */
 .dragon{
   width:320px;
-  filter:drop-shadow(0 0 30px red);
+  filter:drop-shadow(0 0 25px red);
   animation:float 3s ease-in-out infinite;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-18px);}
+  50%{transform:translateY(-15px);}
 }
 
-/* glow pulse */
-.dragon-glow{
-  position:absolute;
-  left:50%;
-  top:110px;
-  transform:translateX(-50%);
-  width:360px;
-  height:360px;
-  background:radial-gradient(circle, rgba(255,0,0,0.25), transparent 70%);
-  filter:blur(20px);
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-  0%,100%{opacity:0.3; transform:translateX(-50%) scale(1);}
-  50%{opacity:0.7; transform:translateX(-50%) scale(1.1);}
-}
-
-/* ===== FIRE BREATH ===== */
+/* ===== FIRE ===== */
 .fire{
   position:absolute;
   left:50%;
-  top:180px;
+  top:160px;
   transform:translateX(-50%);
   width:10px;
   height:10px;
@@ -103,18 +96,18 @@ body{
 }
 
 .fire.active{
-  animation:fireBlast 1s ease-out;
+  animation:blast 1s ease-out;
 }
 
-@keyframes fireBlast{
+@keyframes blast{
   0%{width:10px;height:10px;opacity:0;}
-  20%{opacity:1;}
-  100%{width:500px;height:120px;opacity:0;}
+  30%{opacity:1;}
+  100%{width:520px;height:140px;opacity:0;}
 }
 
 /* ===== TEXT ===== */
 .title{
-  font-size:46px;
+  font-size:48px;
   font-weight:bold;
   background:linear-gradient(90deg,gold,orange,red);
   -webkit-background-clip:text;
@@ -124,27 +117,29 @@ body{
 .sub{
   font-size:18px;
   opacity:0.8;
-  margin-top:10px;
+  margin-top:8px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="cloud"></div>
-<div class="cloud2"></div>
-<div class="cloud3"></div>
+<div class="clouds"></div>
 
 <div class="center">
 
-  <div class="dragon-glow"></div>
+  <div class="dragon-wrap">
 
-  <!-- DRAGON SVG (lebih detail dari sebelumnya) -->
-  <svg class="dragon" viewBox="0 0 512 512">
-    <path fill="#ff2b2b" d="M256 40c70 40 110 110 90 180-15 55-70 85-70 130 0 50 70 80 110 130-100-20-150-70-170-120-20 50-70 100-170 120 40-50 110-80 110-130 0-45-55-75-70-130C146 150 186 80 256 40z"/>
-  </svg>
+    <div class="glow"></div>
 
-  <div class="fire" id="fire"></div>
+    <!-- DRAGON (PURE SVG, NO IMAGE LINK) -->
+    <svg class="dragon" viewBox="0 0 512 512">
+      <path fill="#ff2b2b" d="M256 35c75 45 115 120 95 190-15 55-70 85-70 130 0 55 75 85 120 135-110-25-160-80-185-140-25 60-75 115-185 140 45-50 120-80 120-135 0-45-55-75-70-130C141 155 181 80 256 35z"/>
+    </svg>
+
+    <div class="fire" id="fire"></div>
+
+  </div>
 
   <div class="title">MexCloud Store</div>
   <div class="sub">Breath The Vibe</div>
@@ -156,11 +151,10 @@ const fire = document.getElementById("fire");
 
 function breatheFire(){
   fire.classList.add("active");
-  setTimeout(()=> fire.classList.remove("active"), 1000);
+  setTimeout(()=>fire.classList.remove("active"),1000);
 }
 
-// tiap 4 detik
-setInterval(breatheFire, 4000);
+setInterval(breatheFire,4000);
 breatheFire();
 </script>
 
