@@ -13,7 +13,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
   position: relative;
   width: 100%;
@@ -28,6 +28,7 @@ body {
   width: 250px;
   opacity: 0.9;
   animation: moveClouds 60s linear infinite;
+  pointer-events: none;
 }
 
 .cloud1 { top: 80px; left: -300px; }
@@ -63,12 +64,13 @@ body {
 
 <div class="hero">
 
-<img class="cloud cloud1" src="./cloud.png">
-<img class="cloud cloud2" src="./cloud.png">
-<img class="cloud cloud3" src="./cloud.png">
+  <!-- CLOUD (pakai cache buster biar GitHub gak ngelag) -->
+  <img class="cloud cloud1" src="./cloud.png?v=1">
+  <img class="cloud cloud2" src="./cloud.png?v=1">
+  <img class="cloud cloud3" src="./cloud.png?v=1">
 
   <!-- DRAGON -->
-  <img class="dragon" src="dragon.png" alt="dragon">
+  <img class="dragon" src="./dragon.png?v=1" alt="dragon">
 
 </div>
 
