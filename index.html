@@ -175,6 +175,13 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+ .card {
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
 </style>
 </head>
 
@@ -301,8 +308,16 @@ function checkoutTelegram() {
     msg += `${i+1}. ${item}%0A`;
   });
 
-  let bot = "@MexCloudStore"; // ganti ini
+  let bot = "MexCloudStore"; // ganti ini
   window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
+}
+ function openCart() {
+  if (cart.length === 0) {
+    alert("Cart masih kosong");
+    return;
+  }
+  document.getElementById("cart-popup").style.display = "block";
+  renderCart();
 }
 </script>
 
