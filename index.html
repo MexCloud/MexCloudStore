@@ -175,12 +175,12 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
- .card {
-  transition: 0.2s;
+.card {
+  transition: 0.2s ease;
 }
 
 .card:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 </style>
 </head>
@@ -270,11 +270,6 @@ function showProducts(type) {
 }
 
 /* CART */
-function openCart() {
-  document.getElementById("cart-popup").style.display = "block";
-  renderCart();
-}
-
 function closeCart() {
   document.getElementById("cart-popup").style.display = "none";
 }
@@ -311,11 +306,7 @@ function checkoutTelegram() {
   let bot = "MexCloudStore"; // ganti ini
   window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
 }
- function openCart() {
-  if (cart.length === 0) {
-    alert("Cart masih kosong");
-    return;
-  }
+function openCart() {
   document.getElementById("cart-popup").style.display = "block";
   renderCart();
 }
