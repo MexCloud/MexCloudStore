@@ -37,22 +37,18 @@ body {
 }
 
 .search-top {
-    flex: 1;
-    margin: 0 15px;
-}
-
-.cart {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-.search-top {
   flex: 1;
   display: flex;
   justify-content: center;
+  margin: 0 15px;
 }
-
+.cart {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
 .search-top input {
   width: 100%;
   max-width: 500px;
@@ -61,12 +57,6 @@ body {
   border: none;
   background: #f1f1f1;
 }
-
-.cart {
-  cursor: pointer;
-  font-size: 20px;
-}
-
 #cart-count {
   background: red;
   color: white;
@@ -311,7 +301,7 @@ function checkoutTelegram() {
     msg += `${i+1}. ${item}%0A`;
   });
 
-  let bot = "YOUR_BOT_USERNAME"; // ganti ini
+  let bot = "@MexCloudStore"; // ganti ini
   window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
 }
 </script>
