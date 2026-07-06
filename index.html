@@ -184,13 +184,27 @@ body {
 .cloud {
   position: absolute;
   top: 40px;
-  right: 5%;
+  left: -200px;
   width: 180px;
   opacity: 0.9;
   z-index: 2;
+
+  animation: cloudMove 20s linear infinite,
+             cloudFloat 4s ease-in-out infinite;
 }
 
-/* DRAGON */
+/* jalan kiri ke kanan */
+@keyframes cloudMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(120vw); }
+}
+
+/* naik turun */
+@keyframes cloudFloat {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
 .dragon {
   position: absolute;
   bottom: 0;
@@ -214,25 +228,16 @@ body {
   50% { transform: translateX(-50%) translateY(-15px); }
   100% { transform: translateX(-50%) translateY(0px); }
 }
-.cloud {
-  position: absolute;
-  top: 40px;
-  right: 5%;
-  width: 180px;
-  opacity: 0.9;
-  z-index: 2;
-  animation: cloudMove 12s ease-in-out infinite;
-}
 
-@keyframes cloudMove {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(-50px); }
-  100% { transform: translateX(0); }
-}
  @media (max-width: 600px) {
   .dragon {
     width: 280px;
   }
+  @media (max-width: 600px) {
+  .dragon {
+    width: 280px;
+  }
+
   .cloud {
     width: 120px;
   }
@@ -255,7 +260,6 @@ body {
   </div>
 </div>
 
-<!-- HERO -->
 <!-- HERO -->
 <div class="hero">
 
