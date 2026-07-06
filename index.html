@@ -172,22 +172,6 @@ body {
 .card:hover {
   transform: scale(1.05);
 }
- .cloud {
-  position: absolute;
-  top: 20px;
-  left: 10%;
-  width: 200px;
-  opacity: 0.8;
-  z-index: 1;
-}
-
-.dragon {
-  position: absolute;
-  bottom: 0;
-  right: 10%;
-  width: 300px;
-  z-index: 2;
-}
  .hero {
   margin-top: 60px;
   height: 100vh;
@@ -215,18 +199,43 @@ body {
   width: 420px;
   z-index: 3;
 }
- .cloud {
-  animation: float 6s ease-in-out infinite;
-}
-
 .dragon {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 420px;
+  transform: translateX(-50%);
+  z-index: 3;
   animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateX(-50%) translateY(0px); }
+  50% { transform: translateX(-50%) translateY(-15px); }
+  100% { transform: translateX(-50%) translateY(0px); }
+}
+.cloud {
+  position: absolute;
+  top: 40px;
+  right: 5%;
+  width: 180px;
+  opacity: 0.9;
+  z-index: 2;
+  animation: cloudMove 12s ease-in-out infinite;
+}
+
+@keyframes cloudMove {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-50px); }
+  100% { transform: translateX(0); }
+}
+ @media (max-width: 600px) {
+  .dragon {
+    width: 280px;
+  }
+  .cloud {
+    width: 120px;
+  }
 }
 </style>
 </head>
@@ -362,7 +371,7 @@ function checkoutTelegram() {
     msg += `${i+1}. ${item}%0A`;
   });
 
-  let bot = "MexCloudStore"; // ganti ini
+  let bot = "https://web.telegram.org/k/#@MexCloudStore"; // ganti ini
   window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
 }
 function openCart() {
