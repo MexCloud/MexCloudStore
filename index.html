@@ -189,27 +189,23 @@ body {
   opacity: 0.9;
   z-index: 2;
 
-  animation: moveCloud 20s linear infinite;
+  animation: moveCloud linear infinite, floatCloud 4s ease-in-out infinite;
 }
 
-/* GERAK KIRI → KANAN (PAKAI LEFT, BUKAN TRANSFORM) */
+/* gerak mulus kiri ke kanan */
 @keyframes moveCloud {
   0% {
-    left: -200px;
+    transform: translateX(-300px);
   }
   100% {
-    left: 110%;
+    transform: translateX(130vw);
   }
 }
 
-/* FLOAT TERPISAH (BIAR TIDAK KONFLIK) */
-.cloud {
-  animation: moveCloud 20s linear infinite, floatCloud 4s ease-in-out infinite;
-}
-
+/* naik turun */
 @keyframes floatCloud {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-15px); }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
 }
 .dragon {
