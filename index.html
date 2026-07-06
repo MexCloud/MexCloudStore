@@ -182,15 +182,13 @@ body {
 
 /* CLOUD */
 .cloud {
-  position: absolute;
-  left: -200px;
-  width: 180px;
-  opacity: 0.9;
-  z-index: 2;
+    position: absolute;
+    left: -200px;
+    width: 180px;
+    opacity: 0.9;
+    z-index: 2;
 
-  animation-name: moveCloud;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+    animation: moveCloud 20s linear infinite;
 }
 
 /* gerak mulus kiri ke kanan */
@@ -201,14 +199,6 @@ body {
   to {
     left: 110%;
   }
-}
-.dragon {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 420px;
-  z-index: 3;
 }
 .dragon {
   position: absolute;
@@ -233,11 +223,11 @@ body {
     width: 120px;
   }
 }
-.c1 { top: 40px; animation-duration: 18s; animation-delay: 0s; }
-.c2 { top: 100px; animation-duration: 22s; animation-delay: 4s; }
-.c3 { top: 160px; animation-duration: 26s; animation-delay: 8s; }
-.c4 { top: 220px; animation-duration: 20s; animation-delay: 12s; }
-.c5 { top: 280px; animation-duration: 24s; animation-delay: 16s; }
+.c1 { top:40px; animation-duration:18s; }
+.c2 { top:100px; animation-duration:22s; }
+.c3 { top:160px; animation-duration:26s; }
+.c4 { top:220px; animation-duration:20s; }
+.c5 { top:280px; animation-duration:24s; }
 </style>
 </head>
 
