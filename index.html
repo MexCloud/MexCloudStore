@@ -181,6 +181,22 @@ body {
 .card:hover {
   transform: scale(1.05);
 }
+ .cloud {
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  width: 200px;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.dragon {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  width: 300px;
+  z-index: 2;
+}
 </style>
 </head>
 
@@ -200,11 +216,17 @@ body {
 </div>
 
 <!-- HERO -->
+<!-- HERO -->
 <div class="hero">
+
+  <img src="cloud.png" class="cloud">
+  <img src="dragon.png" class="dragon">
+
   <div class="brand">
     <h1 class="title">MexCloud Store</h1>
     <h2 class="subtitle">BREATH THE VIBES</h2>
   </div>
+
 </div>
 
 <!-- KATALOG -->
