@@ -371,8 +371,8 @@ function checkoutTelegram() {
     msg += `${i+1}. ${item}%0A`;
   });
 
-  let bot = "https://web.telegram.org/k/#@MexCloudStore"; // ganti ini
-  window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
+  let bot = "MexCloudStore";
+window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
 }
 function openCart() {
   document.getElementById("cart-popup").style.display = "block";
