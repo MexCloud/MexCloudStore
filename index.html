@@ -416,27 +416,18 @@ function openCart() {
   document.getElementById("cart-popup").style.display = "block";
   renderCart();
 }
+function lightningStrike() {
+  const el = document.querySelector('.lightning');
+  if (!el) return;
+
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = null;
+
+  setTimeout(lightningStrike, Math.random() * 8000 + 2000);
+}
+lightningStrike();
 </script>
-<body>
 
-  <!-- isi website kamu -->
-  <div class="lightning"></div>
-
-  <!-- SCRIPT PETIR -->
-  <script>
-  function lightningStrike() {
-    const el = document.querySelector('.lightning');
-    if (!el) return; // biar aman
-
-    el.style.animation = 'none';
-    void el.offsetWidth;
-    el.style.animation = null;
-
-    setTimeout(lightningStrike, Math.random() * 8000 + 2000);
-  }
-  lightningStrike();
-  </script>
-
-</body>
 </body>
 </html>
