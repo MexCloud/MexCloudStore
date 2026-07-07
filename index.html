@@ -247,8 +247,7 @@ body {
   background: white;
   opacity: 0;
   pointer-events: none;
-  z-index: 9999;
-  animation: flash 6s infinite;
+  z-index: 9998;
 }
 
 /* ANIMASI PETIR */
@@ -277,31 +276,41 @@ body {
   position: fixed;
   top: 0;
   left: 50%;
-  width: 4px;
-  height: 0;
+  width: 100px;
+  height: 80vh;
   background: white;
-  transform: translateX(-50%);
   opacity: 0;
-  z-index: 9998;
-  box-shadow: 0 0 20px white, 0 0 40px #aeefff;
+  z-index: 9999;
+  transform: translateX(-50%);
+  clip-path: polygon(
+    55% 0%,
+    35% 35%,
+    55% 35%,
+    20% 70%,
+    45% 70%,
+    10% 100%,
+    70% 55%,
+    45% 55%,
+    75% 20%
+  );
+  filter: drop-shadow(0 0 15px white);
 }
 /* ANIMASI PETIR TURUN */
 @keyframes strike {
   0% {
-    height: 0;
     opacity: 0;
+    transform: translateX(-50%) scaleY(0);
   }
-  10% {
-    height: 60vh;
-    opacity: 1;
-  }
-  15% {
-    height: 65vh;
-    opacity: 0.8;
-  }
+
   20% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  40% {
     opacity: 0;
   }
+
   100% {
     opacity: 0;
   }
@@ -457,21 +466,21 @@ function lightningStrike() {
 
   if (!flash || !bolt) return;
 
-  // flash layar
-  flash.style.animation = 'none';
-  void flash.offsetWidth;
-  flash.style.animation = null;
+  flash.style.opacity = "0.8";
 
-  // posisi random petir
+  setTimeout(() => {
+    flash.style.opacity = "0";
+  }, 100);
+
   bolt.style.left = Math.random() * 80 + 10 + "%";
 
-  // animasi garis petir
-  bolt.style.animation = 'none';
+  bolt.style.animation = "none";
   void bolt.offsetWidth;
-  bolt.style.animation = "strike 0.4s ease-out";
+  bolt.style.animation = "strike 0.5s ease-out";
 
   setTimeout(lightningStrike, Math.random() * 6000 + 2000);
 }
+
 lightningStrike();
 </script>
 
