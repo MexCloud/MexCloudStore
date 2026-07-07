@@ -272,11 +272,46 @@ body {
  .lightning {
   background: radial-gradient(circle, white 0%, #aeefff 40%, transparent 70%);
 }
+ /* GARIS PETIR */
+.lightning-bolt {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 0;
+  background: white;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 9998;
+  box-shadow: 0 0 20px white, 0 0 40px #aeefff;
+}
+/* ANIMASI PETIR TURUN */
+@keyframes strike {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  10% {
+    height: 60vh;
+    opacity: 1;
+  }
+  15% {
+    height: 65vh;
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
 <body>
 <div class="lightning"></div>
+<div class="lightning-bolt"></div>
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="logo">MexCloud</div>
