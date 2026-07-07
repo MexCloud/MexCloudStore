@@ -452,14 +452,25 @@ function openCart() {
   renderCart();
 }
 function lightningStrike() {
-  const el = document.querySelector('.lightning');
-  if (!el) return;
+  const flash = document.querySelector('.lightning');
+  const bolt = document.querySelector('.lightning-bolt');
 
-  el.style.animation = 'none';
-  void el.offsetWidth;
-  el.style.animation = null;
+  if (!flash || !bolt) return;
 
-  setTimeout(lightningStrike, Math.random() * 8000 + 2000);
+  // flash layar
+  flash.style.animation = 'none';
+  void flash.offsetWidth;
+  flash.style.animation = null;
+
+  // posisi random petir
+  bolt.style.left = Math.random() * 80 + 10 + "%";
+
+  // animasi garis petir
+  bolt.style.animation = 'none';
+  void bolt.offsetWidth;
+  bolt.style.animation = "strike 0.4s ease-out";
+
+  setTimeout(lightningStrike, Math.random() * 6000 + 2000);
 }
 lightningStrike();
 </script>
