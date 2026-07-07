@@ -239,15 +239,12 @@ body {
 }
  /* LAYER PETIR */
 .lightning {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   background: white;
   opacity: 0;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 5;
 }
 
 /* ANIMASI PETIR */
@@ -273,14 +270,14 @@ body {
 }
  /* GARIS PETIR */
 .lightning-bolt {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
   width: 100px;
-  height: 80vh;
+  height: 80%;
   background: white;
   opacity: 0;
-  z-index: 9999;
+  z-index: 6;
   transform: translateX(-50%);
   clip-path: polygon(
     55% 0%,
@@ -319,8 +316,6 @@ body {
 </head>
 
 <body>
-<div class="lightning"></div>
-<div class="lightning-bolt"></div>
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="logo">MexCloud</div>
@@ -337,17 +332,21 @@ body {
 <!-- HERO -->
 <div class="hero">
 
+<div class="lightning"></div>
+<div class="lightning-bolt"></div>
+
 <img src="./cloud.png" class="cloud c1">
 <img src="cloud.png" class="cloud c2">
 <img src="cloud.png" class="cloud c3">
 <img src="cloud.png" class="cloud c4">
 <img src="cloud.png" class="cloud c5">
- <img src="./dragon.png" class="dragon">
 
-  <div class="brand">
-    <h1 class="title">MexCloud Store</h1>
-    <h2 class="subtitle">BREATH THE VIBES</h2>
-  </div>
+<img src="./dragon.png" class="dragon">
+
+<div class="brand">
+<h1 class="title">MexCloud Store</h1>
+<h2 class="subtitle">BREATH THE VIBES</h2>
+</div>
 
 </div>
 
@@ -466,11 +465,11 @@ function lightningStrike() {
 
   if (!flash || !bolt) return;
 
-  flash.style.opacity = "0.8";
+  flash.style.opacity = "0.35";
 
   setTimeout(() => {
     flash.style.opacity = "0";
-  }, 100);
+  }, 150);
 
   bolt.style.left = Math.random() * 80 + 10 + "%";
 
