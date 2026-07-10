@@ -625,6 +625,28 @@ function lightningStrike() {
 
   setTimeout(lightningStrike, Math.random() * 6000 + 2000);
 }
+ function openCart() {
+  document.getElementById("cart-popup").style.display = "block";
+  renderCart();
+}
+
+// TAMBAHAN KATALOG BARU
+
+function toggleCategory(id){
+
+let all = document.querySelectorAll(".subcategory");
+
+all.forEach(item=>{
+ item.style.display="none";
+});
+
+let selected = document.getElementById(id);
+
+if(selected){
+ selected.style.display="block";
+}
+
+}
 
 lightningStrike();
 </script>
