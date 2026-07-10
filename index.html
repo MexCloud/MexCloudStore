@@ -307,6 +307,74 @@ body {
   width:100%;
   z-index:7;
 }
+ .catalog {
+  padding: 40px 30px;
+  background: white;
+}
+
+
+.catalog-title {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
+
+.catalog-grid {
+
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+
+}
+
+
+.category-card {
+
+  background:black;
+  color:white;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+
+.category-card:hover {
+
+ transform:translateY(-5px);
+
+}
+
+
+
+.subcategory {
+
+ display:none;
+ text-align:center;
+ margin-top:25px;
+
+}
+
+
+.subcategory button {
+
+ padding:12px 20px;
+ margin:5px;
+
+ border:none;
+ border-radius:10px;
+
+ background:#111;
+ color:white;
+
+ cursor:pointer;
+
+}
 </style>
 </head>
 
@@ -345,15 +413,98 @@ body {
 
 </div>
 
-<!-- KATALOG -->
-<div class="catalog">
+<!-- PRODUCT CATALOG -->
+<section class="catalog" id="catalog">
 
-  <div class="category" onclick="toggle('obat')">OBAT INDONESIA</div>
-  <div class="sub" id="obat">
-    <div onclick="showProducts('obat-umum')">Obat Umum</div>
-    <div onclick="showProducts('obat-18')">Obat 18+</div>
-  </div>
+<h2 class="catalog-title">
+PRODUCT CATALOG
+</h2>
 
+<div class="catalog-grid">
+
+
+<div class="category-card" onclick="toggleCategory('pod')">
+💨 POD
+</div>
+
+
+<div class="category-card" onclick="toggleCategory('rokok')">
+🚬 ROKOK
+</div>
+
+
+<div class="category-card" onclick="toggleCategory('obat')">
+💊 OBAT INDONESIA
+</div>
+
+
+<div class="category-card" onclick="toggleCategory('handphone')">
+📱 HANDPHONE
+</div>
+
+
+<div class="category-card" onclick="toggleCategory('parfume')">
+🌸 PARFUME
+</div>
+
+
+</div>
+<!-- SUB CATEGORY -->
+
+
+<div class="subcategory" id="pod">
+
+<button>DEVICE</button>
+<button>SALTNIC FRUITY</button>
+<button>SALTNIC CREAMY</button>
+<button>CARTRIDGE</button>
+<button>LIQUID FREEBASE</button>
+
+</div>
+
+
+
+<div class="subcategory" id="rokok">
+
+<button>ROKOK INDONESIA</button>
+<button>ROKOK CAMBODIA</button>
+
+</div>
+
+
+
+<div class="subcategory" id="obat">
+
+<button>OBAT UMUM</button>
+<button>OBAT 18+</button>
+
+</div>
+
+
+
+<div class="subcategory" id="handphone">
+
+<button>SECOND HAND</button>
+<button>BRAND NEW BOX</button>
+
+</div>
+
+
+
+<div class="subcategory" id="parfume">
+
+<button>MEN</button>
+<button>WOMEN</button>
+
+</div>
+
+
+</section>
+
+
+<!-- TEMPAT PRODUK NANTI MUNCUL -->
+
+<div class="products" id="products"></div>
   <div class="category" onclick="showProducts('rokok')">ROKOK INDONESIA</div>
 
 </div>
