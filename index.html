@@ -668,9 +668,9 @@ function showCategoryProducts(category){
           ${product.desc}
         </div>
 
-        <button>
-          Add to Cart
-        </button>
+<button onclick='addToCart(${JSON.stringify(product)})'>
+  Add to Cart
+</button>
 
       </div>
     `;
