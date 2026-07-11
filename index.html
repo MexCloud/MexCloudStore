@@ -695,7 +695,7 @@ function renderCart() {
   cart.forEach((item, i) => {
     container.innerHTML += `
       <div class="cart-item">
-        <span>${item}</span>
+       <span>${item.name}</span>
         <button onclick="removeItem(${i})">Hapus</button>
       </div>
     `;
