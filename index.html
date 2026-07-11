@@ -640,19 +640,16 @@ function toggle(id) {
   let el = document.getElementById(id);
   el.style.display = el.style.display === "block" ? "none" : "block";
 }
+function showCategoryProducts(category){
 
-function showProducts(type) {
-  const data = {
-    "obat-umum": ["Paracetamol", "Bodrex"],
-    "obat-18": ["Obat Kuat A", "Obat Kuat B"],
-    "Rokok Indonesia": ["Gudang Garam", "Marlboro"]
-  };
- 
   const container = document.getElementById("product-list");
 
   container.innerHTML = "";
 
-  const filtered = products.filter(product => product.category === category);
+  const filtered = products.filter(product => 
+    product.category === category
+  );
+
 
   filtered.forEach(product => {
 
@@ -663,11 +660,15 @@ function showProducts(type) {
 
         <h3>${product.name}</h3>
 
-        <div class="price">$${product.price} USD</div>
+        <div class="price">
+          $${product.price} USD
+        </div>
 
-        <div class="desc">${product.desc}</div>
+        <div class="desc">
+          ${product.desc}
+        </div>
 
-        <button onclick="addToCart(product)">
+        <button>
           Add to Cart
         </button>
 
@@ -677,7 +678,6 @@ function showProducts(type) {
   });
 
 }
-
 
 /* CART */
 function closeCart() {
