@@ -714,8 +714,8 @@ function checkoutTelegram() {
 
   let msg = "Pesanan MexCloud:%0A";
   cart.forEach((item, i) => {
-    msg += `${i+1}. ${item}%0A`;
-  });
+    msg += `${i+1}. ${item.name} $${item.price}%0A`;
+});
 
   let bot = "MexCloudStore";
 window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
