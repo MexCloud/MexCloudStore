@@ -678,18 +678,6 @@ function showProducts(type) {
 
 }
 
-  let container = document.getElementById("products");
-  container.innerHTML = "";
-
-  (data[type] || []).forEach(item => {
-    container.innerHTML += `
-      <div class="card">
-        <h3>${item}</h3>
-        <button onclick="addToCart('${item}')">Beli</button>
-      </div>
-    `;
-  });
-}
 
 /* CART */
 function closeCart() {
