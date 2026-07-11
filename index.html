@@ -436,6 +436,31 @@ font-size:22px;
  cursor:pointer;
 
 }
+ .product-image{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:#0b8f2f;
+margin-top:5px;
+}
+
+.desc{
+font-size:13px;
+color:#666;
+margin-top:5px;
+margin-bottom:10px;
+}
+
+.card button{
+margin-top:auto;
+}
 </style>
 </head>
 
@@ -515,12 +540,15 @@ OUR PRODUCTS
 
 <div class="subcategory" id="pod">
 
-<button>DEVICE</button>
-<button>SALTNIC FRUITY</button>
-<button>SALTNIC CREAMY</button>
-<button>CARTRIDGE</button>
-<button>LIQUID FREEBASE</button>
+<button onclick="showCategoryProducts('device')">DEVICE</button>
+<button onclick="showCategoryProducts('fruity')">SALTNIC FRUITY</button>
+<button onclick="showCategoryProducts('creamy')">SALTNIC CREAMY</button>
+<button onclick="showCategoryProducts('cartridge')">CARTRIDGE</button>
+<button onclick="showCategoryProducts('freebase')">LIQUID FREEBASE</button>
 
+<div class="products" id="product-list"></div>
+
+</div>
 </div>
 
 
@@ -575,7 +603,33 @@ OUR PRODUCTS
 </div>
 
 <script>
-let cart = [];
+ let cart = [];
+ const products = [
+  {
+    id: 1,
+    category: "device",
+    name: "OXVA XLIM PRO 2",
+    price: 25,
+    desc: "Original Device",
+    image: "./images/xlimpro2.jpg"
+  },
+  {
+    id: 2,
+    category: "device",
+    name: "OXVA XLIM GO",
+    price: 18,
+    desc: "Original Device",
+    image: "./images/xlimgo.jpg"
+  },
+  {
+    id: 3,
+    category: "fruity",
+    name: "Tokyo Mango",
+    price: 9,
+    desc: "30ml Saltnic",
+    image: "./images/tokyo-mango.jpg"
+  }
+];
 
 function addToCart(item) {
   cart.push(item);
