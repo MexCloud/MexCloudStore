@@ -647,6 +647,37 @@ function showProducts(type) {
     "obat-18": ["Obat Kuat A", "Obat Kuat B"],
     "Rokok Indonesia": ["Gudang Garam", "Marlboro"]
   };
+ function showCategoryProducts(category){
+
+  const container = document.getElementById("product-list");
+
+  container.innerHTML = "";
+
+  const filtered = products.filter(product => product.category === category);
+
+  filtered.forEach(product => {
+
+    container.innerHTML += `
+      <div class="card">
+
+        <img src="${product.image}" class="product-image">
+
+        <h3>${product.name}</h3>
+
+        <div class="price">$${product.price} USD</div>
+
+        <div class="desc">${product.desc}</div>
+
+        <button onclick="addToCart(product)">
+          Add to Cart
+        </button>
+
+      </div>
+    `;
+
+  });
+
+}
 
   let container = document.getElementById("products");
   container.innerHTML = "";
