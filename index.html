@@ -747,7 +747,7 @@ function checkoutTelegram() {
 window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
 }
 function openCart() {
-  document.getElementById("cart-popup").style.display = "block";
+  document.getElementById("cart-popup").classList.add("active");
   renderCart();
 }
 function lightningStrike() {
