@@ -132,22 +132,25 @@ body {
   cursor: pointer;
 }
 
-/* CART POPUP */
 .cart-popup {
-  display: none;
+  display: block;
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+  top: 0;
+  right: -400px;
+  width: 380px;
+  height: 100vh;
+  background: white;
   z-index: 9999;
+  transition: 0.35s ease;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+}
+
+.cart-popup.active {
+  right: 0;
 }
 
 .cart-box {
-  background: white;
-  width: 90%;
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 25px;
 }
 
 .cart-item {
