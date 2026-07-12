@@ -471,6 +471,13 @@ margin-top:auto;
   object-fit:contain;
   border-radius:10px;
 }
+ @media(max-width:600px){
+
+.cart-popup{
+ width:100%;
+}
+
+}
 
 </style>
 </head>
@@ -601,7 +608,10 @@ OUR PRODUCTS
 <!-- CART POPUP -->
 <div id="cart-popup" class="cart-popup">
   <div class="cart-box">
-    <h3>🛒 Keranjang</h3>
+    <div style="display:flex;justify-content:space-between;">
+<h3>🛒 Keranjang</h3>
+<button onclick="closeCart()">✕</button>
+</div>
     <div id="cart-items"></div>
 
     <br>
