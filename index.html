@@ -771,14 +771,58 @@ if(selected){
 }
 
 }
- function openImage(src){
-  document.getElementById("img-popup").style.display = "flex";
+function openImage(src){
+
+  let popup = document.getElementById("img-popup");
+
+  popup.style.display = "flex";
   document.getElementById("popup-img").src = src;
+
+  history.pushState({popup:true}, "");
 }
 
-document.getElementById("img-popup").onclick = function(){
-  this.style.display = "none";
+
+function closeImage(){
+
+  document.getElementById("img-popup").style.display = "none";
+
 }
+
+
+// klik background hitam
+document.getElementById("img-popup").addEventListener("click", function(e){
+
+  if(e.target === this){
+    closeImage();
+
+    if(history.state && history.state.popup){
+      history.back();
+    }
+  }
+
+});
+
+
+// tombol ESC desktop
+document.addEventListener("keydown", function(e){
+
+  if(e.key === "Escape"){
+    closeImage();
+  }
+
+});
+
+
+// tombol back browser
+window.addEventListener("popstate", function(){
+
+  let popup = document.getElementById("img-popup");
+
+  if(popup.style.display === "flex"){
+    popup.style.display = "none";
+  }
+
+});
 
 lightningStrike();
 </script>
