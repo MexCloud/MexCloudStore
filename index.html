@@ -707,7 +707,7 @@ onclick="openImage('${product.image}')">
 
 /* CART */
 function closeCart() {
-  document.getElementById("cart-popup").style.display = "none";
+  document.getElementById("cart-popup").classList.remove("active");
 }
 function renderCart() {
   let container = document.getElementById("cart-items");
