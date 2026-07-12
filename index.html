@@ -461,6 +461,14 @@ margin-bottom:10px;
 .card button{
 margin-top:auto;
 }
+ .product-image{
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.product-image:hover{
+  transform:scale(1.05);
+}
 </style>
 </head>
 
@@ -656,7 +664,8 @@ function showCategoryProducts(category){
     container.innerHTML += `
       <div class="card">
 
-        <img src="${product.image}" class="product-image">
+       <img src="${product.image}" class="product-image"
+onclick="openImage('${product.image}')">
 
         <h3>${product.name}</h3>
 
