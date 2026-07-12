@@ -807,15 +807,10 @@ function closeImage(){
 }
 
 
-// klik background hitam
 document.getElementById("img-popup").addEventListener("click", function(e){
 
   if(e.target === this){
     closeImage();
-
-    if(history.state && history.state.popup){
-      history.back();
-    }
   }
 
 });
