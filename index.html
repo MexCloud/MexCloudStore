@@ -695,31 +695,32 @@ function showCategoryProducts(category){
   );
 
 
-  filtered.forEach(product => {
+filtered.forEach(product => {
 
-    container.innerHTML += `
-  <div class="card">
+  container.innerHTML += `
+    <div class="card">
 
-    <img src="${product.image}" class="product-image"
-    onclick="openImage('${product.image}')">
+      <img src="${product.image}" class="product-image"
+      onclick="openImage('${product.image}')">
 
-    <h3>${product.name}</h3>
+      <h3>${product.name}</h3>
 
-    <div class="price">
-      $${product.price} USD
+      <div class="price">
+        $${product.price} USD
+      </div>
+
+      <div class="desc">
+        ${product.desc}
+      </div>
+
+      <button onclick="addToCart(${product.id})">
+        Add to Cart
+      </button>
+
     </div>
+  `;
 
-    <div class="desc">
-      ${product.desc}
-    </div>
-
-    <button onclick="addToCart(${product.id})">
-      Add to Cart
-    </button>
-
-  </div>
-`;
-}
+}); // 🔥 INI YANG KURANG
 
 /* CART */
 function closeCart() {
