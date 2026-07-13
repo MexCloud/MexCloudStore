@@ -673,13 +673,13 @@ const products = [
   }
 ];
 
-function addToCart(item) {
+function addToCart(id) {
+  const item = products.find(p => p.id === id);
   cart.push(item);
   document.getElementById("cart-count").innerText = cart.length;
   renderCart();
   openCart();
 }
-
 function toggle(id) {
   let el = document.getElementById(id);
   el.style.display = el.style.display === "block" ? "none" : "block";
@@ -698,30 +698,27 @@ function showCategoryProducts(category){
   filtered.forEach(product => {
 
     container.innerHTML += `
-      <div class="card">
+  <div class="card">
 
-       <img src="${product.image}" class="product-image"
-onclick="openImage('${product.image}')">
+    <img src="${product.image}" class="product-image"
+    onclick="openImage('${product.image}')">
 
-        <h3>${product.name}</h3>
+    <h3>${product.name}</h3>
 
-        <div class="price">
-          $${product.price} USD
-        </div>
+    <div class="price">
+      $${product.price} USD
+    </div>
 
-        <div class="desc">
-          ${product.desc}
-        </div>
+    <div class="desc">
+      ${product.desc}
+    </div>
 
-<button onclick='addToCart(${JSON.stringify(product)})'>
-  Add to Cart
-</button>
+    <button onclick="addToCart(${product.id})">
+      Add to Cart
+    </button>
 
-      </div>
-    `;
-
-  });
-
+  </div>
+`;
 }
 
 /* CART */
