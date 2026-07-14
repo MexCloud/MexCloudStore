@@ -1037,20 +1037,14 @@ function showCategoryProducts(category){
     `;
   });
 
-  // scroll tetap jalan
+  // ✅ SCROLL FIX (WITH OFFSET TOPBAR)
   const yOffset = -70;
   const element = document.getElementById("product-list");
   const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
   window.scrollTo({ top: y, behavior: "smooth" });
 
-}
-const yOffset = -70; // tinggi topbar kamu
-const element = document.getElementById("product-list");
-const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-window.scrollTo({ top: y, behavior: "smooth" });
-}
+ 
 /* CART */
 function closeCart() {
   document.getElementById("cart-popup").classList.remove("active");
