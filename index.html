@@ -1026,11 +1026,11 @@ function showCategoryProducts(category){
     `;
   });
 
-  // ✅ INI YANG PENTING
-  document.getElementById("product-list").scrollIntoView({
-    behavior: "smooth"
-  });
+const yOffset = -70; // tinggi topbar kamu
+const element = document.getElementById("product-list");
+const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
+window.scrollTo({ top: y, behavior: "smooth" });
 }
 /* CART */
 function closeCart() {
