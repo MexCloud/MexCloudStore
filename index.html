@@ -1003,9 +1003,20 @@ function showCategoryProducts(category){
   const container = document.getElementById("product-list");
   container.innerHTML = "";
 
-  const filtered = products.filter(product => 
-    product.category === category
-  );
+  let filtered;
+
+  // ✅ KHUSUS ROKOK (ambil semua rokok)
+  if(category === "rokok"){
+    filtered = products.filter(product =>
+      product.category.includes("rokok")
+    );
+  } 
+  // ✅ SELAIN ITU NORMAL
+  else {
+    filtered = products.filter(product =>
+      product.category === category
+    );
+  }
 
   filtered.forEach(product => {
     container.innerHTML += `
@@ -1026,6 +1037,14 @@ function showCategoryProducts(category){
     `;
   });
 
+  // scroll tetap jalan
+  const yOffset = -70;
+  const element = document.getElementById("product-list");
+  const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+  window.scrollTo({ top: y, behavior: "smooth" });
+
+}
 const yOffset = -70; // tinggi topbar kamu
 const element = document.getElementById("product-list");
 const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
