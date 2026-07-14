@@ -1121,28 +1121,28 @@ function lightningStrike() {
 
 function toggleCategory(id){
 
-let all = document.querySelectorAll(".subcategory");
+  let all = document.querySelectorAll(".subcategory");
 
-all.forEach(item=>{
- item.style.display="none";
-});
+  all.forEach(item=>{
+    item.style.display="none";
+  });
 
-let selected = document.getElementById(id);
+  let selected = document.getElementById(id);
 
-if(selected){
- selected.style.display="block";
+  if(selected){
+    selected.style.display="block";
+  }
+
+  // ✅ TAMBAHIN DI SINI
+  if(id === "pod"){
+    showCategoryProducts("device");
+  }
+
+  if(id === "rokok"){
+    showCategoryProducts("rokok");
+  }
+
 }
-
-}
-function openImage(src){
-
-  let popup = document.getElementById("img-popup");
-
-  popup.style.display = "flex";
-  document.getElementById("popup-img").src = src;
-
-}
-
 
 function closeImage(){
 
