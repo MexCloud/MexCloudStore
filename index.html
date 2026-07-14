@@ -1068,18 +1068,17 @@ container.innerHTML="";
   });
 
 
-  const yOffset = -70;
-  const element = document.getElementById("product-list");
+const yOffset = -70;
 
-  const y = element.getBoundingClientRect().top 
-  + window.pageYOffset 
-  + yOffset;
+const y = container.getBoundingClientRect().top 
++ window.pageYOffset 
++ yOffset;
 
 
-  window.scrollTo({
-    top:y,
-    behavior:"smooth"
-  });
+window.scrollTo({
+  top:y,
+  behavior:"smooth"
+});
 
 }
 
