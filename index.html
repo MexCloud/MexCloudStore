@@ -1011,8 +1011,17 @@ function addToCart(id) {
 
 function showCategoryProducts(category){
 
-  const container = document.getElementById("product-list");
-  container.innerHTML = "";
+let container;
+
+
+if(category.includes("rokok")){
+ container = document.getElementById("rokok-list");
+}else{
+ container = document.getElementById("product-list");
+}
+
+
+container.innerHTML="";
 
   let filtered;
 
