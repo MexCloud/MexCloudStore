@@ -992,11 +992,15 @@ const products = [
 
 function addToCart(id) {
   const item = products.find(p => p.id === id);
-  cart.push(item);
-  document.getElementById("cart-count").innerText = cart.length;
-  renderCart();
-  openCart();
+
+  if(item){
+    cart.push(item);
+    document.getElementById("cart-count").innerText = cart.length;
+    renderCart();
+    openCart();
+  }
 }
+
 
 function showCategoryProducts(category){
 
@@ -1005,163 +1009,339 @@ function showCategoryProducts(category){
 
   let filtered;
 
-  // ✅ KHUSUS ROKOK (ambil semua rokok)
   if(category === "rokok"){
     filtered = products.filter(product =>
       product.category.includes("rokok")
     );
-  } 
-  // ✅ SELAIN ITU NORMAL
-  else {
+  } else {
     filtered = products.filter(product =>
       product.category === category
     );
   }
 
+
   filtered.forEach(product => {
+
     container.innerHTML += `
-      <div class="card">
-        <img src="${product.image}" class="product-image"
-        onclick="openImage('${product.image}')">
 
-        <h3>${product.name}</h3>
+    <div class="card">
 
-        <div class="price">$${product.price} USD</div>
+      <img 
+      src="${product.image}" 
+      class="product-image"
+      onclick="openImage('${product.image}')">
 
-        <div class="desc">${product.desc}</div>
+      <h3>${product.name}</h3>
 
-        <button onclick="addToCart(${product.id})">
-          Add to Cart
-        </button>
+      <div class="price">
+      $${product.price} USD
       </div>
+
+      <div class="desc">
+      ${product.desc}
+      </div>
+
+      <button onclick="addToCart(${product.id})">
+      Add to Cart
+      </button>
+
+    </div>
+
     `;
+
   });
 
-  // ✅ SCROLL FIX (WITH OFFSET TOPBAR)
+
   const yOffset = -70;
   const element = document.getElementById("product-list");
-  const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-  window.scrollTo({ top: y, behavior: "smooth" });
+  const y = element.getBoundingClientRect().top 
+  + window.pageYOffset 
+  + yOffset;
 
- 
-/* CART */
-function closeCart() {
-  document.getElementById("cart-popup").classList.remove("active");
-}
-function renderCart() {
-  let container = document.getElementById("cart-items");
-  container.innerHTML = "";
 
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Cart masih kosong</p>";
-    return;
-  }
-
-  cart.forEach((item, i) => {
-    container.innerHTML += `
-      <div class="cart-item">
-       <span>${item.name}</span>
-        <button onclick="removeItem(${i})">Hapus</button>
-      </div>
-    `;
+  window.scrollTo({
+    top:y,
+    behavior:"smooth"
   });
-}
-function removeItem(i) {
-  cart.splice(i, 1);
-  document.getElementById("cart-count").innerText = cart.length;
-  renderCart();
-}
- 
 
-/* CHECKOUT TELEGRAM */
-function checkoutTelegram() {
-  if (cart.length === 0) return alert("Cart kosong!");
-
-  let msg = "Pesanan MexCloud:%0A";
-  cart.forEach((item, i) => {
-    msg += `${i+1}. ${item.name} $${item.price}%0A`;
-});
-
-  let bot = "MexCloudStore";
-window.open(`https://t.me/${bot}?text=${msg}`, "_blank");
-}
-function openCart() {
-  document.getElementById("cart-popup").classList.add("active");
-  renderCart();
-}
-function lightningStrike() {
-  const flash = document.querySelector('.lightning');
-  const bolt = document.querySelector('.lightning-bolt');
-
-  if (!flash || !bolt) return;
-
-  flash.style.opacity = "0.35";
-
-  setTimeout(() => {
-    flash.style.opacity = "0";
-  }, 150);
-
-  bolt.style.left = Math.random() * 80 + 10 + "%";
-
-  bolt.style.animation = "none";
-  void bolt.offsetWidth;
-  bolt.style.animation = "strike 0.5s ease-out";
-
-  setTimeout(lightningStrike, Math.random() * 6000 + 2000);
 }
 
-// TAMBAHAN KATALOG BARU
+
+
+// =================
+// CART
+// =================
+
+
+function openCart(){
+
+ document
+ .getElementById("cart-popup")
+ .classList.add("active");
+
+ renderCart();
+
+}
+
+
+function closeCart(){
+
+ document
+ .getElementById("cart-popup")
+ .classList.remove("active");
+
+}
+
+
+
+function renderCart(){
+
+ let container = document.getElementById("cart-items");
+
+ container.innerHTML="";
+
+
+ if(cart.length===0){
+
+  container.innerHTML=
+  "<p>Cart masih kosong</p>";
+
+  return;
+
+ }
+
+
+ cart.forEach((item,index)=>{
+
+
+ container.innerHTML += `
+
+ <div class="cart-item">
+
+ <span>
+ ${item.name}
+ </span>
+
+
+ <button onclick="removeItem(${index})">
+ Hapus
+ </button>
+
+
+ </div>
+
+ `;
+
+
+ });
+
+
+}
+
+
+
+function removeItem(index){
+
+ cart.splice(index,1);
+
+ document
+ .getElementById("cart-count")
+ .innerText = cart.length;
+
+
+ renderCart();
+
+}
+
+
+
+// =================
+// CHECKOUT TELEGRAM
+// =================
+
+
+function checkoutTelegram(){
+
+ if(cart.length===0){
+
+ alert("Cart kosong!");
+
+ return;
+
+ }
+
+
+ let msg="Pesanan MexCloud:%0A";
+
+
+ cart.forEach((item,index)=>{
+
+ msg += 
+ `${index+1}. ${item.name} $${item.price}%0A`;
+
+ });
+
+
+ let bot="MexCloudStore";
+
+
+ window.open(
+ `https://t.me/${bot}?text=${msg}`,
+ "_blank"
+ );
+
+
+}
+
+
+
+// =================
+// CATEGORY
+// =================
+
 
 function toggleCategory(id){
 
-  let all = document.querySelectorAll(".subcategory");
 
-  all.forEach(item=>{
-    item.style.display="none";
-  });
+ let all=document.querySelectorAll(".subcategory");
 
-  let selected = document.getElementById(id);
 
-  if(selected){
-    selected.style.display="block";
-  }
+ all.forEach(item=>{
 
-  // ✅ TAMBAHIN DI SINI
-  if(id === "pod"){
-    showCategoryProducts("device");
-  }
+ item.style.display="none";
 
-  if(id === "rokok"){
-    showCategoryProducts("rokok");
-  }
+ });
+
+
+ let selected=document.getElementById(id);
+
+
+ if(selected){
+
+ selected.style.display="block";
+
+ }
+
+
+ if(id==="pod"){
+
+ showCategoryProducts("device");
+
+ }
+
 
 }
+
+
+
+// =================
+// IMAGE POPUP
+// =================
+
+
+function openImage(image){
+
+ document
+ .getElementById("popup-img")
+ .src=image;
+
+
+ document
+ .getElementById("img-popup")
+ .style.display="flex";
+
+}
+
+
 
 function closeImage(){
 
-  document.getElementById("img-popup").style.display = "none";
+ document
+ .getElementById("img-popup")
+ .style.display="none";
 
 }
 
 
-document.getElementById("img-popup").addEventListener("click", function(e){
 
-  if(e.target === this){
-    closeImage();
-  }
+document
+.getElementById("img-popup")
+.addEventListener("click",function(e){
+
+
+ if(e.target===this){
+
+ closeImage();
+
+ }
+
+
+});
+
+
+
+document.addEventListener("keydown",function(e){
+
+ if(e.key==="Escape"){
+
+ closeImage();
+
+ }
 
 });
 
 
-// tombol ESC desktop
-document.addEventListener("keydown", function(e){
 
-  if(e.key === "Escape"){
-    closeImage();
-  }
+// =================
+// LIGHTNING
+// =================
 
-});
+
+function lightningStrike(){
+
+ const flash=document.querySelector('.lightning');
+ const bolt=document.querySelector('.lightning-bolt');
+
+
+ if(!flash || !bolt)return;
+
+
+
+ flash.style.opacity="0.35";
+
+
+ setTimeout(()=>{
+
+ flash.style.opacity="0";
+
+ },150);
+
+
+
+ bolt.style.left =
+ Math.random()*80+10+"%";
+
+
+ bolt.style.animation="none";
+
+
+ void bolt.offsetWidth;
+
+
+ bolt.style.animation=
+ "strike 0.5s ease-out";
+
+
+
+ setTimeout(
+ lightningStrike,
+ Math.random()*6000+2000
+ );
+
+
+}
+
 
 
 lightningStrike();
