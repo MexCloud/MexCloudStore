@@ -1259,24 +1259,24 @@ function renderCart(){
  cart.forEach((item,index)=>{
 
 
- container.innerHTML += `
+container.innerHTML += `
 
- <div class="cart-item">
+<div class="cart-item">
 
- <span>
- ${item.name}
- </span>
+  <div>
+    <div>${item.name}</div>
+    <div style="color:#0b8f2f; font-size:13px;">
+      $${item.price}
+    </div>
+  </div>
 
+  <button onclick="removeItem(${index})">
+    ✕
+  </button>
 
- <button onclick="removeItem(${index})">
- Hapus
- </button>
+</div>
 
-
- </div>
-
- `;
-
+`;
 
  });
 
