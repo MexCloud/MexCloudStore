@@ -1314,47 +1314,33 @@ function removeItem(index){
 
 function checkoutTelegram(){
 
- if(cart.length===0){
-
- alert("Cart kosong!");
-
- return;
-
+ if(cart.length === 0){
+  alert("Cart kosong!");
+  return;
  }
 
+ let msg = "Pesanan MexCloud:%0A";
 
- let msg="Pesanan MexCloud:%0A";
-
+ let total = 0;
 
  cart.forEach((item,index)=>{
-  // item list
-});
 
-let total = 0;
+  msg += `${index+1}. ${item.name} - $${item.price}%0A`;
 
-cart.forEach(item => {
   total += item.price;
-});
-
-container.innerHTML += `Total: $${total}`;
-
- msg += 
- `${index+1}. ${item.name} $${item.price}%0A`;
 
  });
 
+ msg += `%0ATotal: $${total}`;
 
- let bot="MexCloudStore";
-
+ let bot = "MexCloudStore";
 
  window.open(
- `https://t.me/${bot}?text=${msg}`,
- "_blank"
+  `https://t.me/${bot}?text=${msg}`,
+  "_blank"
  );
 
-
 }
-
 
 
 // =================
