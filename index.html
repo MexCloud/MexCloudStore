@@ -1320,6 +1320,16 @@ function checkoutTelegram(){
 
 
  cart.forEach((item,index)=>{
+  // item list
+});
+
+let total = 0;
+
+cart.forEach(item => {
+  total += item.price;
+});
+
+container.innerHTML += `Total: $${total}`;
 
  msg += 
  `${index+1}. ${item.name} $${item.price}%0A`;
