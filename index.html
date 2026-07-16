@@ -1243,43 +1243,50 @@ function renderCart(){
 
  let container = document.getElementById("cart-items");
 
- container.innerHTML="";
+ container.innerHTML = "";
 
-
- if(cart.length===0){
-
-  container.innerHTML=
-  "<p>Cart masih kosong</p>";
-
+ // kalau kosong
+ if(cart.length === 0){
+  container.innerHTML = "<p>Cart masih kosong</p>";
   return;
-
  }
 
-
+ // 1️⃣ tampilkan semua item
  cart.forEach((item,index)=>{
 
+  container.innerHTML += `
 
-container.innerHTML += `
+  <div class="cart-item">
 
-<div class="cart-item">
-
-  <div>
-    <div>${item.name}</div>
-    <div style="color:#0b8f2f; font-size:13px;">
-      $${item.price}
+    <div>
+      <div>${item.name}</div>
+      <div style="color:#0b8f2f; font-size:13px;">
+        $${item.price}
+      </div>
     </div>
+
+    <button onclick="removeItem(${index})">✕</button>
+
   </div>
 
-  <button onclick="removeItem(${index})">
-    ✕
-  </button>
-
-</div>
-
-`;
+  `;
 
  });
 
+ // 2️⃣ hitung total
+ let total = 0;
+
+ cart.forEach(item => {
+  total += item.price;
+ });
+
+ // 3️⃣ tampilkan total
+ container.innerHTML += `
+  <hr style="margin:10px 0;">
+  <div style="font-weight:bold; font-size:16px;">
+    Total: $${total}
+  </div>
+ `;
 
 }
 
