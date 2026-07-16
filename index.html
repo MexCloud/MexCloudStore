@@ -1166,9 +1166,9 @@ let filtered = products.filter(product =>
       $${product.price} / Pcs
       </div>
 
-      <div class="desc">
-      ${product.desc}
-      </div>
+     <div class="desc">
+     ${product.desc.replaceAll("✅", "<br>✅")}
+     </div>
 
       <button onclick="addToCart(${product.id})">
       Add to Cart
