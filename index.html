@@ -1120,7 +1120,7 @@ const products = [
     image: "./images/fbasefurlamilkyvanilla.jpg"
   },
 {
-    id: 57,
+    id: 60,
     category: "obat umum",
     name: "Minyak Kayu Putih",
     price: 6.25,
@@ -1156,10 +1156,19 @@ let container;
 
 
 if(category.includes("rokok")){
+
  container = document.getElementById("rokok-list");
+
+}else if(category.includes("obat")){
+
+ container = document.getElementById("obat-list");
+
 }else{
+
  container = document.getElementById("product-list");
+
 }
+
 
 
 container.innerHTML="";
