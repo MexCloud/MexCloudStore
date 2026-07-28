@@ -1136,7 +1136,16 @@ const products = [
     price: 11,
     desc: "30ml Saltnic Fruity",
     image: "./images/icyapple.jpg"
-  }
+  },
+ {
+    id: 60,
+    category: "aksesoris",
+    name: "Airpods Pro 3",
+    price: 25,
+    desc: "arphone nirkabel pintar dari Apple yang hadir dengan peredam kebisingan aktif (ANC) hingga 2x lebih baik, sensor detak jantung, dan fitur terjemahan langsung (live translation",
+    image: "./images/minyakkayuputih.jpg"
+}
+ 
 
 ];
 
@@ -1165,13 +1174,15 @@ if(category.includes("rokok")){
 
  container = document.getElementById("obat-list");
 
+}else if(category.includes("aksesoris")){
+
+ container = document.getElementById("aksesoris-list");
+
 }else{
 
  container = document.getElementById("product-list");
 
 }
-
-
 
 container.innerHTML="";
 
