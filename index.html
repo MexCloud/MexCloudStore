@@ -1392,9 +1392,8 @@ function checkoutTelegram(){
 
   cart.forEach((item,index)=>{
 
-    let subtotal = item.price * item.qty;
-    total += subtotal;
-
+let qty = item.qty || 1;
+let subtotal = item.price * qty;
     msg += `${index+1}. ${item.name}%0A`;
     msg += `   $${item.price} x ${item.qty} = $${subtotal}%0A%0A`;
   });
