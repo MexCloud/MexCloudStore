@@ -1272,38 +1272,42 @@ function closeCart(){
 
 
 function renderCart(){
+  let container = document.getElementById("cart-items");
+  container.innerHTML = "";
 
- let container = document.getElementById("cart-items");
+  if(cart.length === 0){
+    container.innerHTML = "<p>Cart masih kosong</p>";
+    return;
+  }
 
- container.innerHTML = "";
+  let total = 0;
 
- // kalau kosong
- if(cart.length === 0){
-  container.innerHTML = "<p>Cart masih kosong</p>";
-  return;
- }
+  cart.forEach((item,index)=>{
 
- // 1️⃣ tampilkan semua item
- cart.forEach((item,index)=>{
+    let subtotal = item.price * item.qty;
+    total += subtotal;
 
-  container.innerHTML += `
+    container.innerHTML += `
+    <div class="cart-item">
+      <div>
+        <b>${item.name}</b><br>
+        $${item.price} x ${item.qty} = 
+        <span style="color:#0b8f2f">$${subtotal}</span>
+      </div>
 
-  <div class="cart-item">
-
-    <div>
-      <div>${item.name}</div>
-      <div style="color:#0b8f2f; font-size:13px;">
-        $${item.price}
+      <div>
+        <button onclick="minusQty(${index})">-</button>
+        <button onclick="plusQty(${index})">+</button>
       </div>
     </div>
+    `;
+  });
 
-    <button onclick="removeItem(${index})">✕</button>
-
-  </div>
-
+  container.innerHTML += `
+  <hr>
+  <h3>Total: $${total}</h3>
   `;
-
- });
+}
 
  // 2️⃣ hitung total
  let total = 0;
@@ -1321,7 +1325,19 @@ function renderCart(){
  `;
 
 }
+function plusQty(i){
+  cart[i].qty++;
+  renderCart();
+}
 
+function minusQty(i){
+  if(cart[i].qty > 1){
+    cart[i].qty--;
+  }else{
+    cart.splice(i,1);
+  }
+  renderCart();
+}
 
 
 function removeItem(index){
