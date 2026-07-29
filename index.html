@@ -1177,7 +1177,7 @@ function addToCart(id){
   if(exist){
     exist.qty += 1;
   }else{
-    cart.push({...item, qty:1});
+  cart.reduce((a,b)=>a+(b.qty || 1),0)
   }
 
   document.getElementById("cart-count").innerText =
