@@ -1307,26 +1307,25 @@ function renderCart(){
     let subtotal = item.price * item.qty;
     total += subtotal;
 
-    container.innerHTML += `
-    <div class="cart-item">
-      <div>
-        <b>${item.name}</b><br>
-        $${item.price} x ${item.qty} = 
-        <span style="color:#0b8f2f">$${subtotal}</span>
-      </div>
+container.innerHTML += `
+<div class="cart-item">
+  <div>
+    <b>${item.name}</b><br>
+    $${item.price} x ${qty} = 
+    <span style="color:#0b8f2f">$${subtotal}</span>
+  </div>
 
-      <div>
-        <button onclick="minusQty(${index})">-</button>
-        <button onclick="plusQty(${index})">+</button>
-      </div>
-    </div>
-    `;
-  });
-
-  container.innerHTML += `
-  <hr>
-  <h3>Total: $${total}</h3>
-  `;
+  <div>
+    <button onclick="minusQty(${index})">-</button>
+    <button onclick="plusQty(${index})">+</button>
+  </div>
+</div>
+`;
+   
+container.innerHTML += `
+<hr>
+<h3>Total: $${total}</h3>
+`;
 }
 
  // 2️⃣ hitung total
