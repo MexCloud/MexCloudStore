@@ -1149,17 +1149,23 @@ const products = [
 
 ];
 
-function addToCart(id) {
+function addToCart(id){
   const item = products.find(p => p.id === id);
 
-  if(item){
-    cart.push(item);
-    document.getElementById("cart-count").innerText = cart.length;
-    renderCart();
-    openCart();
-  }
-}
+  const exist = cart.find(p => p.id === id);
 
+  if(exist){
+    exist.qty += 1;
+  }else{
+    cart.push({...item, qty:1});
+  }
+
+  document.getElementById("cart-count").innerText =
+  cart.reduce((a,b)=>a+b.qty,0);
+
+  renderCart();
+  openCart();
+}
 
 function showCategoryProducts(category){
 
