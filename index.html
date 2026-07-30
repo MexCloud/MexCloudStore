@@ -1171,19 +1171,16 @@ const products = [
 
 function addToCart(id){
   const item = products.find(p => p.id === id);
-
   const exist = cart.find(p => p.id === id);
 
   if(exist){
     exist.qty += 1;
-   let qty = item.qty || 1;
-let subtotal = item.price * qty;
-}else{
-  cart.push({...item, qty:1});
-}
+  }else{
+    cart.push({...item, qty:1});
+  }
 
   document.getElementById("cart-count").innerText =
-  cart.reduce((a,b)=>a+b.qty,0);
+    cart.reduce((a,b)=>a+b.qty,0);
 
   renderCart();
   openCart();
