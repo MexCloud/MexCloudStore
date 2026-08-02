@@ -1351,7 +1351,8 @@ function removeItem(index){
 
  document
  .getElementById("cart-count")
- .innerText = cart.length;
+ .innerText =
+  cart.reduce((a,b)=>a+b.qty,0);
 
 
  renderCart();
