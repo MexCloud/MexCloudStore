@@ -1179,8 +1179,7 @@ function addToCart(id){
     cart.push({...item, qty:1});
   }
 
-document.getElementById("cart-count").innerText =
-  cart.reduce((a,b)=>a+b.qty,0);
+updateCartCount();
 
   renderCart();
   openCart();
@@ -1332,6 +1331,7 @@ function renderCart(){
 
 function plusQty(i){
   cart[i].qty++;
+ updateCartCount();
   renderCart();
 }
 
@@ -1341,6 +1341,7 @@ function minusQty(i){
   }else{
     cart.splice(i,1);
   }
+ updateCartCount();
   renderCart();
 }
 
@@ -1348,7 +1349,7 @@ function minusQty(i){
 function removeItem(index){
 
  cart.splice(index,1);
-
+updateCartCount();
  document
  .getElementById("cart-count")
  .innerText =
