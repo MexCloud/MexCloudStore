@@ -1301,12 +1301,6 @@ function renderCart(){
 
   let total = 0;
 
-  cart.forEach((item,index)=>{
-
-    let qty = item.qty || 1;
-    let subtotal = item.price * qty;
-    total += subtotal;
-
     container.innerHTML += `
     <div class="cart-item">
       <div>
@@ -1375,13 +1369,15 @@ function checkoutTelegram(){
   let msg = "🛒 ORDER MEXCLOUD STORE %0A%0A";
   let total = 0;
 
-  cart.forEach((item,index)=>{
+cart.forEach((item,index)=>{
+ let qty = item.qty || 1;
+ let subtotal = item.price * qty;
 
-let qty = item.qty || 1;
-let subtotal = item.price * qty;
-    msg += `${index+1}. ${item.name}%0A`;
-    msg += `   $${item.price} x ${qty} = $${subtotal}%0A%0A`;
-  });
+ total += subtotal; // <-- INI WAJIB
+
+ msg += `${index+1}. ${item.name}%0A`;
+ msg += `   $${item.price} x ${qty} = $${subtotal}%0A%0A`;
+});
 
   msg += `TOTAL: $${total}`;
 
