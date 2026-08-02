@@ -1179,8 +1179,8 @@ function addToCart(id){
     cart.push({...item, qty:1});
   }
 
-  document.getElementById("cart-count").innerText =
-    cart.reduce((a,b)=>a+b.qty,0);
+document.getElementById("cart-count").innerText =
+  cart.reduce((a,b)=>a+b.qty,0);
 
   renderCart();
   openCart();
