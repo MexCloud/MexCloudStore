@@ -1315,10 +1315,11 @@ function renderCart(){
         <span style="color:#0b8f2f">$${subtotal}</span>
       </div>
 
-      <div>
-        <button onclick="minusQty(${index})">-</button>
-        <button onclick="plusQty(${index})">+</button>
-      </div>
+<div>
+  <button onclick="minusQty(${index})">-</button>
+  <button onclick="plusQty(${index})">+</button>
+  <button onclick="removeItem(${index})">❌</button>
+</div>
     </div>
     `;
   });
@@ -1345,20 +1346,50 @@ function minusQty(i){
   renderCart();
 }
 
-
 function removeItem(index){
-
- cart.splice(index,1);
-updateCartCount();
- document
- .getElementById("cart-count")
- .innerText =
-  cart.reduce((a,b)=>a+b.qty,0);
-
+  cart.splice(index,1);
+  updateCartCount(); // ini aja
+  renderCart();
+}
 
  renderCart();
 
 }
+ function updateCartCount(){
+  let totalQty = 0;
+
+  cart.forEach(item=>{
+    totalQty += item.qty || 1;
+  });
+
+  document.getElementById("cart-count").innerText = totalQty;
+}
+ document.querySelector('.search-top input')
+.addEventListener('input', function(e){
+
+  let keyword = e.target.value.toLowerCase();
+
+  let filtered = products.filter(p =>
+    p.name.toLowerCase().includes(keyword)
+  );
+
+  let container = document.getElementById("product-list");
+
+  container.innerHTML = "";
+
+  filtered.forEach(product => {
+
+    container.innerHTML += `
+    <div class="card">
+      <img src="${product.image}" class="product-image">
+      <h3>${product.name}</h3>
+      <div class="price">$${product.price}</div>
+      <button onclick="addToCart(${product.id})">Add</button>
+    </div>
+    `;
+  });
+
+});
 
 
 
@@ -1491,6 +1522,10 @@ document.addEventListener("keydown",function(e){
 
 });
 
+ function formatUSD(num){
+  return "$" + num.toFixed(2);
+}
+
 
 
 // =================
@@ -1545,6 +1580,7 @@ function lightningStrike(){
 
 
 lightningStrike();
+updateCartCount();
 </script>
 
 </body>
