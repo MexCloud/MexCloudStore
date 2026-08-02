@@ -1417,33 +1417,31 @@ let subtotal = item.price * qty;
 
 function toggleCategory(id){
 
-
  let all=document.querySelectorAll(".subcategory");
 
-
  all.forEach(item=>{
-
- item.style.display="none";
-
+  item.style.display="none";
  });
-
 
  let selected=document.getElementById(id);
 
-
  if(selected){
-
- selected.style.display="block";
-
+  selected.style.display="block";
  }
 
-
+ // AUTO LOAD PRODUK DEFAULT
  if(id==="pod"){
-
- showCategoryProducts("device");
-
+  showCategoryProducts("device");
  }
-
+ else if(id==="rokok"){
+  showCategoryProducts("rokok indonesia");
+ }
+ else if(id==="obat"){
+  showCategoryProducts("obat umum");
+ }
+ else if(id==="aksesoris"){
+  showCategoryProducts("aksesoris");
+ }
 
 }
 
