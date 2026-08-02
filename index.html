@@ -1330,22 +1330,6 @@ function renderCart(){
   `;
 }
 
- // 2️⃣ hitung total
- let total = 0;
-
- cart.forEach(item => {
-  total += item.price;
- });
-
- // 3️⃣ tampilkan total
- container.innerHTML += `
-  <hr style="margin:10px 0;">
-  <div style="font-weight:bold; font-size:16px;">
-    Total: $${total}
-  </div>
- `;
-
-}
 function plusQty(i){
   cart[i].qty++;
   renderCart();
