@@ -681,7 +681,7 @@ SEMUA AKSESORIS
     <button onclick="closeCart()">Tutup</button>
   </div>
 </div>
- <!-- IMAGE POPUP -->
+<!-- IMAGE POPUP -->
 <div id="img-popup" style="
 display:none;
 position:fixed;
@@ -692,11 +692,29 @@ align-items:center;
 z-index:99999;
 ">
 
+<button onclick="closeImage()" 
+style="
+position:absolute;
+top:20px;
+right:30px;
+font-size:30px;
+background:none;
+border:none;
+color:white;
+cursor:pointer;
+">
+✕
+</button>
+
 <img id="popup-img" style="
 border-radius:10px;
 ">
 
 </div>
+
+
+<script>
+ let cart = [];
 
 <script>
  let cart = [];
