@@ -1348,12 +1348,11 @@ function minusQty(i){
 
 function removeItem(index){
   cart.splice(index,1);
-  updateCartCount(); // ini aja
+  updateCartCount();
   renderCart();
 }
 
-}
- function updateCartCount(){
+function updateCartCount(){
   let totalQty = 0;
 
   cart.forEach(item=>{
